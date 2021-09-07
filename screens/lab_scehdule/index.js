@@ -4,7 +4,7 @@
  */
 
  import React, { Component } from "react";
- import { StyleSheet,Dimensions, Image, Text, View, FlatList , TouchableHighlight} from "react-native";
+ import { StyleSheet,Dimensions, Image, Text, View, FlatList} from "react-native";
  
  import Icon from "react-native-vector-icons/Fontisto";
  import { Input, Divider ,Button} from "react-native-elements";
@@ -41,6 +41,8 @@
  
    renderBody() {
      const { testList } = this.state;
+     
+   
      return (
        <View style={{ flex: 1 }}>
  
@@ -70,8 +72,123 @@
           
          </View>
  
+         <View style={{
+               flexDirection: 'row',
+              //  justifyContent: 'center',
+               //alignItems: 'center',
+                //marginTop: 2,
+                marginBottom: 0,
+                marginLeft:20,
+                marginRight:20
  
- 
+             }}>
+            
+            
+                <View style={[styles.cardRootContainer,{width:80,backgroundColor: '#3c64a3',color:"white",borderBottomRightRadius:0,borderTopRightRadius:0}]}>
+                  <View style={styles.cardContentContainer}>
+                  <View style={styles.cardHeaderContainer}>
+                  <View style={{
+                      flexDirection: 'row',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      marginLeft: 50,
+        
+                    }}>
+                      <View>
+                        <View style={{ width: DeviceWidth * 0.65 }}>
+                          <Text style={styles.Day}>Today</Text>
+                        </View>
+                        <View style={{ width: DeviceWidth * 0.65 }}>
+                          <Text style={styles.Day}>July 19</Text>
+                        </View>
+
+                      
+                          
+                      </View>
+                    </View>
+                  </View>
+                  </View>
+                </View>
+              
+                <View style={[styles.cardRootContainer,{width:80,borderRadius:0, borderStyle: 'solid',borderRightWidth: 2,borderRightColor: 'white',}]}>
+                  <View style={styles.cardContentContainer}>
+                  <View style={styles.cardHeaderContainer}>
+                  <View style={{
+                      flexDirection: 'row',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      marginLeft: 50,
+        
+                    }}>
+                      <View>
+                        <View style={{ width: DeviceWidth * 0.65 }}>
+                          <Text style={styles.day}>Mon</Text>
+                        </View>
+                        <View style={{ width: DeviceWidth * 0.65 }}>
+                          <Text style={styles.day}>July 20</Text>
+                        </View>
+
+                      
+                          
+                      </View>
+                    </View>
+                  </View>
+                  </View>
+                </View>
+               
+                <View style={[styles.cardRootContainer,{width:80,borderRadius:0, borderStyle: 'solid',borderRightWidth: 2,borderRightColor: 'white',}]}>
+                  <View style={styles.cardContentContainer}>
+                  <View style={styles.cardHeaderContainer}>
+                  <View style={{
+                      flexDirection: 'row',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      marginLeft: 50,
+        
+                    }}>
+                      <View>
+                        <View style={{ width: DeviceWidth * 0.65 }}>
+                          <Text style={styles.day}>Tues</Text>
+                        </View>
+                        <View style={{ width: DeviceWidth * 0.65 }}>
+                          <Text style={styles.day}>July 21</Text>
+                        </View>
+
+                      
+                          
+                      </View>
+                    </View>
+                  </View>
+                  </View>
+                </View>
+               
+                <View style={[styles.cardRootContainer,{width:80,borderBottomLeftRadius:0,borderTopLeftRadius:0}]}>
+                    <View style={styles.cardContentContainer}>
+                    <View style={styles.cardHeaderContainer}>
+                    <View style={{
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginLeft: 50,
+          
+                      }}>
+                        <View>
+                          <View style={{ width: DeviceWidth * 0.65 }}>
+                            <Text style={styles.day}>Wed</Text>
+                          </View>
+                          <View style={{ width: DeviceWidth * 0.65 }}>
+                            <Text style={styles.day}>July 22</Text>
+                          </View> 
+                        </View>
+                      </View>
+                    </View>
+                    </View>
+                   
+                </View>
+                
+                
+          </View>
+           
  
  
          <FlatList
@@ -108,50 +225,71 @@
                    <Text style={styles.testName}>{item.sName}</Text>
                  </View>
 
-                 <TouchableHighlight onPress={this._onPressButton} underlayColor="white" style={styles1.button}>
-                    <Text style={styles1.buttonText}>New</Text>
-                </TouchableHighlight>
-
-                <TouchableHighlight onPress={this._onPressButton} underlayColor="white" style={styles1.button}>
-                    <Text style={styles1.buttonText}>Search</Text>
-                </TouchableHighlight>
-
-                <TouchableHighlight onPress={this._onPressButton} underlayColor="white" style={styles1.button}> 
-                    <Text style={styles1.buttonText}>Favorites</Text>
-                </TouchableHighlight>
+               
                   <View style={{
                    
-                    flexDirection: 'row',
+                   
+                   flexDirection: "row",
+                    marginLeft: 5,
+                    marginRight: 15,
+                    justifyContent: 'space-between'
                     
                   }}>
                  
-                    <View style={{ marginLeft: 10,flex:5}}>
+                    <View style={{ marginLeft: 10,marginTop: 10,width: '20%'}}>
                       <Button
                         title="10.00 AM"
                         type="outline"
-                        style={{alignSelf: 'stretch'}}
+                        titleStyle= {{
+                          fontSize: 6
+                        }}
+                        
                       />
                     </View>
-                    <View style={{  marginLeft: 10,flex:5}}>
+                    <View style={{ marginLeft: 10,marginTop: 10,width: '20%'}}>
                       <Button
                         title="12.00 PM"
                         type="outline"
-
+                        titleStyle= {{
+                          fontSize: 6
+                        }}
+                        ButtonStyle= {{
+                          height:5
+                        }}
+                        
                       />
                     </View>
-                    <View style={{ marginLeft: 10,flex:5}}>
+                    <View style={{ marginLeft: 10,marginTop: 10,width: '20%'}}>
                       <Button
                         title="04.00 PM"
                         type="outline"
+                        titleStyle= {{
+                          fontSize: 6,
+                          color:"white"
+                        }}
+                        ButtonStyle= {{
+                          height:5,
+                         
+                        }}
+                        containerStyle={{ backgroundColor: '#3c64a3' }}
+                        
+                        
                       />
                     </View>
-                    <View style={{ marginLeft: 10,flex:5 }}>
+                    <View style={{ marginLeft: 10,marginTop: 10,width: '20%'}}>
                       <Button
                         title="06.00 PM"
                         type="outline"
+                        titleStyle= {{
+                          fontSize: 6
+                        }}
+                        ButtonStyle= {{
+                          height:5
+                        }}
+                        
                       />
                     </View>
-                  
+                   
                   </View>
                 
                </View>

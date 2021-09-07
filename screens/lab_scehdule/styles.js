@@ -92,6 +92,15 @@ export const styles = StyleSheet.create({
     //Width: 70,
    
   },
+  Day : {
+    color:"white",
+    fontWeight:"bold"
+  },
+  day :
+  {
+    paddingRight:5,
+    fontWeight:"bold"
+  },
   cardBodyContainer: {
     flexDirection: "row",
     width: "100%",
