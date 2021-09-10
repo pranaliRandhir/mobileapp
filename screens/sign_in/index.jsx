@@ -17,7 +17,7 @@ import ApiClient from "../../utils/api_client";
 import { COLOR_PRESETS } from "../../presets/colors";
 import { RouteNames } from "../../navigation/route_names";
 import {SvgXml} from 'react-native-svg'
-import { logo } from "../../assets/svg/Icon Logo";
+import { signin } from "../../assets/images/icon10.svg";
 
 
 
@@ -101,7 +101,7 @@ export class SignIn extends Component {
         <View style={styles.rootContainer}>
           <Header />
           {this.renderBody()}
-          <Footer />
+          {/* <Footer /> */}
         </View>
       </>
     );
