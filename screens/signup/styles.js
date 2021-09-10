@@ -81,7 +81,7 @@ export const styles = StyleSheet.create({
     //marginRight: moderateScale(10),
     borderWidth: 2,
     borderColor: COLOR_PRESETS.PRIMARY.DARK,
-    borderRadius: 10,
+    borderRadius: 25git commit -m "commit message"  ,
     height: verticalScale(40),
     borderBottomColor:COLOR_PRESETS.PRIMARY.DARK,
     borderBottomWidth: 2,

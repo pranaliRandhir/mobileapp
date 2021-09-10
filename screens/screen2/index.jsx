@@ -87,55 +87,57 @@ export class Screen2 extends Component {
 
   renderTestCard(item, index) {
     return (
-      <View style={styles.cardRootContainer}>
-        <View style={styles.cardContentContainer}>
-          <View style={styles.cardHeaderContainer}>
-            <Image
-              source={require("../../assets/images/image.png")}
-              style={styles.cardImg}
-            />
+      <TouchableOpacity onPress={() => { this.props.navigation.navigate(RouteNames.LAB_SCHEDULE, item) }} style={styles.cardRootContainer}>
+        <View style={styles.cardRootContainer}>
+          <View style={styles.cardContentContainer}>
+            <View style={styles.cardHeaderContainer}>
+              <Image
+                source={require("../../assets/images/image.png")}
+                style={styles.cardImg}
+              />
 
-            {/* <View style={{
-                flex: 1,
+              {/* <View style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  width:75,
+                
+                }}> */}
+              <View style={{
+                flexDirection: 'row',
                 justifyContent: 'center',
                 alignItems: 'center',
-                width:75,
-               
-              }}> */}
-            <View style={{
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginLeft: 50,
+                marginLeft: 50,
 
-            }}>
-              <View>
-                <View style={{ width: DeviceWidth * 0.65 }}>
-                  <Text style={styles.testName}>{item.sName}</Text>
-                </View>
-                <View style={{ width: DeviceWidth * 0.50, marginLeft: 10 }}>
-                  <Text>Distance 3kms</Text>
-                </View>
-                <View style={{ width: DeviceWidth * 0.50, marginLeft: 10, paddingTop: -10 }}>
-                  <Image
-                    source={require("../../assets/images/star.png")}
-                    style={[styles.cardImg, { height: 20 }]}
-                  />
+              }}>
+                <View>
+                  <View style={{ width: DeviceWidth * 0.65 }}>
+                    <Text style={styles.testName}>{item.sName}</Text>
+                  </View>
+                  <View style={{ width: DeviceWidth * 0.50, marginLeft: 10 }}>
+                    <Text>Distance 3kms</Text>
+                  </View>
+                  <View style={{ width: DeviceWidth * 0.50, marginLeft: 10, paddingTop: -10 }}>
+                    <Image
+                      source={require("../../assets/images/star.png")}
+                      style={[styles.cardImg, { height: 20 }]}
+                    />
+                  </View>
                 </View>
               </View>
+              {/* </View> */}
+              <Image
+                source={require("../../assets/images/image.png")}
+                style={[styles.cardImg, { marginLeft: 40 }]}
+              />
             </View>
-            {/* </View> */}
-            <Image
-              source={require("../../assets/images/image.png")}
-              style={[styles.cardImg, { marginLeft: 40 }]}
-            />
+
+
+
           </View>
 
-
-
         </View>
-
-      </View>
+      </TouchableOpacity>
     );
   }
 
