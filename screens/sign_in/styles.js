@@ -17,9 +17,8 @@ export const styles = StyleSheet.create({
   logoContainer: {
     alignItems: "center",
     justifyContent: "center",
-    //backgroundColor: COLOR_PRESETS.PRIMARY.LIGHT,
+    backgroundColor: COLOR_PRESETS.PRIMARY.LIGHT,
     paddingVertical: verticalScale(5),
-    //marginLeft:80
   },
 
   logoSize: {

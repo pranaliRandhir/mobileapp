@@ -29,8 +29,8 @@ export class Screen2 extends Component {
   componentDidMount() {
     const formData = new FormData();
     // console.log('the navigation params is>>>>>>', this.props.route.params);
-    const testId = this.props.route.params.iTestId;
-    console.log('the navigation params is>>>>>>',  testId );
+    //const testId = this.props.route.params.iTestId;
+    //console.log('the navigation params is>>>>>>',  testId );
 
     formData.append("action", "getLabs");
 

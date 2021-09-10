@@ -19,41 +19,94 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     //backgroundColor: COLOR_PRESETS.PRIMARY.LIGHT,
     paddingVertical: verticalScale(5),
-    //marginLeft:80
+    marginRight:150
   },
 
   logoSize: {
-    width: moderateScale(262),
-    height: moderateScale(262),
+    width: moderateScale(150),
+    height: moderateScale(200),
     resizeMode: "contain",
   },
   inputContainer: {
-    borderWidth: 2,
-    borderColor: COLOR_PRESETS.PRIMARY.DARK,
-    borderRadius: 10,
-    height: verticalScale(30),
-    borderBottomColor:COLOR_PRESETS.PRIMARY.DARK,
+    // borderWidth: 2,
+    // borderColor: COLOR_PRESETS.PRIMARY.DARK,
+    // borderRadius: 10,
+    height: verticalScale(50),
+    //borderBottomColor:COLOR_PRESETS.PRIMARY.DARK,
     borderBottomWidth: 2,
   },
   leftIconContainer: {
-    marginLeft: moderateScale(10),
+    //marginLeft: moderateScale(10),
   },
   input: {
     fontSize: moderateScale(15),
-    textAlign: "center",
+    textAlign: "left",
     letterSpacing: moderateScale(0.12),
+    color:"red"
   },
   inputRootContainer: {
     paddingHorizontal: moderateScale(28),
-    paddingVertical: verticalScale(24),
+    //paddingVertical: verticalScale(24),
     paddingBottom: 0,
   },
   testHeader: {
     marginTop: verticalScale(4),
-    marginLeft: moderateScale(20),
-    fontSize: moderateScale(20),
+    marginLeft: moderateScale(25),
+    fontSize: moderateScale(30),
+    fontWeight:"700",
     color: COLOR_PRESETS.PRIMARY.DARK,
+    marginBottom: verticalScale(5),
+  },
+
+  testHeader1: {
+    marginTop: verticalScale(-4),
+    marginLeft: moderateScale(25),
+    fontSize: moderateScale(15),
+    fontWeight:"600",
+    textDecorationLine:"underline",
+    color: COLOR_PRESETS.PRIMARY.DARK,
+    
     marginBottom: verticalScale(10),
+  },
+  SingIn : {
+    marginTop: verticalScale(-4),
+    marginLeft: moderateScale(75),
+    //marginRight: moderateScale(10),
+    borderWidth: 2,
+    borderColor: COLOR_PRESETS.PRIMARY.DARK,
+    borderRadius: 10,
+    height: verticalScale(40),
+    borderBottomColor:COLOR_PRESETS.PRIMARY.DARK,
+    borderBottomWidth: 2,
+    textAlign: "center",
+    fontSize: moderateScale(20),
+    fontWeight:"600",
+    width:200,
+    paddingTop:5,
+    backgroundColor:COLOR_PRESETS.PRIMARY.DARK,
+    color:"white"
+  },
+  forget : {
+    marginTop: verticalScale(-15),
+    marginLeft: moderateScale(25),
+    marginBottom: verticalScale(20),
+    color: COLOR_PRESETS.PRIMARY.DARK,
+  },
+  bottom :
+  {
+    marginTop: verticalScale(25),
+    marginLeft: moderateScale(25),
+    flexDirection: "row",
+    alignItems: "center",
+    
+
+  },
+  signup : 
+  {
+    fontSize: moderateScale(15),
+    fontWeight:"600",
+    textDecorationLine:"underline",
+    color: COLOR_PRESETS.PRIMARY.DARK,
   },
   listContainer: {
     marginHorizontal: moderateScale(22),

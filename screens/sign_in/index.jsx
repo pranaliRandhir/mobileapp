@@ -11,17 +11,17 @@ import { Input, Divider } from "react-native-elements";
 
 import { Header, Footer } from "../../components";
 import { HealthOrbitImage } from "../../assets";
-import { styles } from "./styles";
+import { styles } from "../styles";
 import ApiClient from "../../utils/api_client";
 
 import { COLOR_PRESETS } from "../../presets/colors";
 import { RouteNames } from "../../navigation/route_names";
-import SvgUri from 'react-native-svg-uri';
+import {SvgXml} from 'react-native-svg'
+import { logo } from "../../assets/svg/Icon Logo";
 
 
 
-
-export class HomeScreen extends Component {
+export class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -42,17 +42,9 @@ export class HomeScreen extends Component {
     const { testList } = this.state;
     return (
       <View style={{ flex: 1 }}>
-        
-       
         <View style={styles.logoContainer}>
-          {/* <SvgUri
-            width="200"
-            height="200"
-            source={{uri:'http://thenewcode.com/assets/images/thumbnails/homer-simpson.svg'}}
-          /> */}
           <Image source={HealthOrbitImage} style={styles.logoSize} />
-
-         
+          {/* <SvgXml xml={logo} width="301px" style={styles.logoSize}  /> */}
         </View>
 
         <Input
@@ -63,9 +55,8 @@ export class HomeScreen extends Component {
           placeholder="Search for pathologies, laboratories"
           leftIcon={<Icon name="search" size={18} color="gray" />}
         />
-        <TouchableOpacity onPress={() => {this.props.navigation.navigate(RouteNames.SCREEN_2)}}>
-          <Text style={styles.testHeader}>Top Diagnostic Test</Text>
-        </TouchableOpacity>
+
+        <Text style={styles.testHeader}>Top Diagnostic Test</Text>
         <FlatList
           data={testList}
           numColumns={2}
@@ -79,7 +70,7 @@ export class HomeScreen extends Component {
 
   renderTestCard(item, index) {
     return (
-      <TouchableOpacity onPress={() => { this.props.navigation.navigate(RouteNames.LAB_SCHEDULE, item) }} style={styles.cardRootContainer}>
+      <TouchableOpacity onPress={() => {  this.props.navigation.navigate(RouteNames.Home) }} style={styles.cardRootContainer}>
         <View style={styles.cardContentContainer}>
           <View style={styles.cardHeaderContainer}>
             <Image
@@ -117,4 +108,4 @@ export class HomeScreen extends Component {
   }
 }
 
-export default HomeScreen;
+export default SignIn;

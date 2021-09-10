@@ -32,7 +32,7 @@ function RootNavigator() {
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName={RouteNames.HOME}
+      initialRouteName={RouteNames.SIGN_IN}
     >
       <Stack.Screen name={RouteNames.SCREEN_2} component={Screen2} />
       <Stack.Screen name={RouteNames.LAB_SCHEDULE} component={LabSchedule} />

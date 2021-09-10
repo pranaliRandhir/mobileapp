@@ -1,121 +1,117 @@
-import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  Button,
-  TextInput,
-  Linking,
-  TouchableOpacity,
-} from "react-native";
+/**
+ * fileName: home/index.js
+ * description: the home screen component
+ */
 
-const Flex = () => {
-  return (
-    <View
-      style={[
-        styles.container,
-        {
-          // Try setting `flexDirection` to `"row"`.
-          flexDirection: "column",
-        },
-      ]}
-    >
-      <View style={{ flex: 0.1, backgroundColor: "#9abcf7" }}>
-        <Text
-          style={{
-            fontsize: 45,
-            fontWeight: "bold",
-            color: "white",
-            paddingTop: 10,
-          }}
-        ></Text>
-      </View>
+ import React, { Component } from "react";
+ import { Image, Text, View, FlatList, TouchableOpacity } from "react-native";
+ 
+ import Icon from "react-native-vector-icons/Fontisto";
+ import { Input, Divider } from "react-native-elements";
+ 
+ import { Header, Footer } from "../../components";
+ import { HealthOrbitImage } from "../../assets";
+ import { styles } from "./styles";
+ import ApiClient from "../../utils/api_client";
+ 
+ import { COLOR_PRESETS } from "../../presets/colors";
+ import { RouteNames } from "../../navigation/route_names";
+//  import SvgUri from 'react-native-svg-uri';
+ 
+ 
+ 
 
-      <View style={{ flex: 1 }}>
-        <Image
-          style={styles.tinyLogo}
-          source={require("../../assets/images/health_logo.png")}
-        />
+ export class SingIn extends Component {
+   constructor(props) {
+     super(props);
+     this.state = {
+       testList: [],
+     };
+   }
+ 
+   componentDidMount() {
+     const formData = new FormData();
+     formData.append("action", "getTests");
+ 
+     ApiClient.post("", formData).then(({ data }) => {
+       this.setState({ testList: data });
+     });
+   }
+ 
+   renderBody() {
+     const { testList } = this.state;
+     return (
+       <View style={{ flex: 1 }}>
+         <View style={styles.logoContainer}>
+           
+           {/* <SvgUri 
+             width="200" 
+             height="200" 
+             source={{uri:'https://kigadel.com/gimonn/ic/Icons/Icon%20Logo.svg'}}
+           /> */}
+           <Image source={HealthOrbitImage} style={styles.logoSize} />
+             
+         </View>
 
-        <Text
-          style={{
-            fontSize: 20,
-            color: "blue",
-            fontWeight: "bold",
-            marginLeft: 40,
-          }}
-        >
-          Sign Up
-        </Text>
+         <TouchableOpacity onPress={() => {this.props.navigation.navigate(RouteNames.SCREEN_2)}}>
+           <Text style={styles.testHeader}>SignUp</Text>
+         </TouchableOpacity>
 
-        <Text
-          style={{ color: "blue" }}
-          onPress={() => Linking.openURL("http://google.com")}
-        >
-          Login
-        </Text>
-        <TextInput
-          style={style.textBox}
-          placeholder={"Email & Mobile Number"}
-          onChangeText={(e) => {
-            this.setState({ email: e });
-          }}
-        ></TextInput>
-        <TextInput
-          style={style.textBox}
-          secureTextEntry={true}
-          placeholder={"Enter Password"}
-          onChangeText={(e) => {
-            this.setState({ password: e });
-          }}
-        ></TextInput>
+         <Text style={styles.testHeader1}>Or Login</Text>
+ 
+         <Input
+           inputContainerStyle={styles.inputContainer}
+           leftIconContainerStyle={styles.leftIconContainer}
+           inputStyle={styles.input}
+           containerStyle={styles.inputRootContainer}
+           placeholder="Email & Mobile No."
+          />
 
-        <TouchableOpacity>
-          <Text style={styles.forgot_button}>Forgot Password?</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.loginBtn}>
-          <Text style={styles.loginText}>LOGIN</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={{ flex: 0.1, backgroundColor: "#9abcf7" }} />
-    </View>
-  );
-};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  tinyLogo: {
-    width: 50,
-    height: 50,
-    margin: 40,
-  },
-  forgot_button: {
-    height: 30,
-    marginBottom: 30,
-    marginLeft: 20,
-  },
-  loginBtn: {
-    width: "80%",
-    color: "#2196f3",
-    borderRadius: 25,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginLeft: 40,
-    backgroundColor: "skyblue",
-  },
-});
-const style = StyleSheet.create({
-  textBox: {
-    borderBottomWidth: 2,
-    borderBottomColor: "black",
-    padding: 10,
-    marginHorizontal: 20,
-    marginVertical: 10,
-  },
-});
+          <Input
+           inputContainerStyle={styles.inputContainer}
+           leftIconContainerStyle={styles.leftIconContainer}
+           inputStyle={styles.input}
+           containerStyle={styles.inputRootContainer}
+           placeholder="Password"
+          />
 
-export default Flex;
+          <TouchableOpacity>
+           <Text style={styles.forget}>Forget Passwrod?</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => {this.props.navigation.navigate(RouteNames.HOME)}}>
+            <Text style={styles.SingIn}>Sign In</Text>
+          </TouchableOpacity>
+
+          <View style={styles.bottom}>
+            <View style={{flex:0.5}}>
+              <Text>No account yet ? </Text>
+            </View>
+            <View style={{flex:1}}>
+              <Text style={styles.signup}>SignUp </Text>
+            </View>
+          </View>
+        
+       </View>
+
+
+
+     );
+   }
+ 
+   
+   render() {
+     return (
+       <>
+         <View style={styles.rootContainer}>
+           <Header />
+           {this.renderBody()}
+           {/* <Footer /> */}
+         </View>
+       </>
+     );
+   }
+ }
+ 
+ export default SingIn;
+ 
