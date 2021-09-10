@@ -11,6 +11,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Screen2 from "../screens/screen2";
 import HomeScreen from "../screens/home";
 import SignIn from "../screens/signin";
+import SignUp from "../screens/signup";
 import LabSchedule from "../screens/lab_scehdule";
 
 import APIDemo from "../screens/api-demo";
@@ -38,6 +39,7 @@ function RootNavigator() {
       <Stack.Screen name={RouteNames.LAB_SCHEDULE} component={LabSchedule} />
       <Stack.Screen name={RouteNames.HOME} component={HomeScreen} />
       <Stack.Screen name={RouteNames.SIGN_IN} component={SignIn} />
+      <Stack.Screen name={RouteNames.SIGN_UP} component={SignUp} />
       <Stack.Screen name={RouteNames.API_DEMO} component={APIDemo} />
     </Stack.Navigator>
   );

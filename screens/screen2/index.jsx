@@ -32,7 +32,7 @@ export class Screen2 extends Component {
     //const testId = this.props.route.params.iTestId;
     //console.log('the navigation params is>>>>>>',  testId );
 
-    formData.append("action", "getLabs");
+    formData.append("action", "getTests");
 
     ApiClient.post("", formData).then(({ data }) => {
       this.setState({ testList: data });

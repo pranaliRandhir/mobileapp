@@ -7,7 +7,7 @@
  import { Image, Text, View, FlatList, TouchableOpacity } from "react-native";
  
  import Icon from "react-native-vector-icons/Fontisto";
- import { Input, Divider } from "react-native-elements";
+ import { Input, CheckBox } from "react-native-elements";
  
  import { Header, Footer } from "../../components";
  import { HealthOrbitImage } from "../../assets";
@@ -21,7 +21,7 @@
  
  
 
- export class SingIn extends Component {
+ export class SingUp extends Component {
    constructor(props) {
      super(props);
      this.state = {
@@ -49,22 +49,36 @@
              height="200" 
              source={{uri:'https://kigadel.com/gimonn/ic/Icons/Icon%20Logo.svg'}}
            /> */}
-           <Image source={HealthOrbitImage} style={styles.logoSize} />
+           {/* <Image source={HealthOrbitImage} style={styles.logoSize} /> */}
              
          </View>
 
          <TouchableOpacity onPress={() => {this.props.navigation.navigate(RouteNames.SCREEN_2)}}>
-           <Text style={styles.testHeader}>Login</Text>
+           <Text style={styles.testHeader}>SignUp</Text>
          </TouchableOpacity>
 
-        
- 
-         <Input
+          <Input
            inputContainerStyle={styles.inputContainer}
            leftIconContainerStyle={styles.leftIconContainer}
            inputStyle={styles.input}
            containerStyle={styles.inputRootContainer}
-           placeholder="Email & Mobile No."
+           placeholder="Username"
+          />
+ 
+          <Input
+           inputContainerStyle={styles.inputContainer}
+           leftIconContainerStyle={styles.leftIconContainer}
+           inputStyle={styles.input}
+           containerStyle={styles.inputRootContainer}
+           placeholder="Email Address"
+          />
+
+          <Input
+           inputContainerStyle={styles.inputContainer}
+           leftIconContainerStyle={styles.leftIconContainer}
+           inputStyle={styles.input}
+           containerStyle={styles.inputRootContainer}
+           placeholder="Mobile No."
           />
 
 
@@ -76,22 +90,24 @@
            placeholder="Password"
           />
 
-          <TouchableOpacity>
-           <Text style={styles.forget}>Forget Password?</Text>
-          </TouchableOpacity>
+
+          <CheckBox
+            style={styles.CheckBox}
+            title='By signing up you accept the terms of services and the privacy policy'
+            checked={this.state.checked}
+          />
+         
           <TouchableOpacity onPress={() => {this.props.navigation.navigate(RouteNames.HOME)}}>
-            <Text style={styles.SingIn}>Sign In</Text>
+            <Text style={styles.SingIn}>Sign Up</Text>
           </TouchableOpacity>
 
           <View style={styles.bottom}>
-            <View style={{flex:0.5}}>
-              <Text>No account yet ? </Text>
+            <View style={{flex:0.6}}>
+              <Text>Already have an account? </Text>
             </View>
-            <View style={{flex:1}}>
-            <TouchableOpacity onPress={() => {this.props.navigation.navigate(RouteNames.SIGN_UP)}}>
-              <Text style={styles.signup}>SignUp </Text>
+            <TouchableOpacity onPress={() => {this.props.navigation.navigate(RouteNames.SIGN_IN)}}>
+              <Text style={styles.signup}>SignIn </Text>
             </TouchableOpacity>
-            </View>
           </View>
         
        </View>
@@ -115,5 +131,5 @@
    }
  }
  
- export default SingIn;
+ export default SingUp;
  

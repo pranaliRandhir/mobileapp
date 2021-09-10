@@ -24,15 +24,16 @@ export const styles = StyleSheet.create({
 
   logoSize: {
     width: moderateScale(150),
-    height: moderateScale(200),
+    height: moderateScale(50),
     resizeMode: "contain",
   },
   inputContainer: {
-    // borderWidth: 2,
-    // borderColor: COLOR_PRESETS.PRIMARY.DARK,
-    // borderRadius: 10,
-    height: verticalScale(50),
-    //borderBottomColor:COLOR_PRESETS.PRIMARY.DARK,
+    borderWidth: 2,
+    backgroundColor: COLOR_PRESETS.PRIMARY.LIGHT,
+    borderRadius: 25,
+    height: verticalScale(40),
+    borderBottomColor:COLOR_PRESETS.PRIMARY.LIGHT,
+    borderColor:COLOR_PRESETS.PRIMARY.LIGHT,
     borderBottomWidth: 2,
   },
   leftIconContainer: {
@@ -42,20 +43,26 @@ export const styles = StyleSheet.create({
     fontSize: moderateScale(15),
     textAlign: "left",
     letterSpacing: moderateScale(0.12),
-    color:"red"
+    color:"red",
+    paddingLeft:20,
   },
   inputRootContainer: {
     paddingHorizontal: moderateScale(28),
     //paddingVertical: verticalScale(24),
     paddingBottom: 0,
+    
+  },
+  CheckBox : {
+    borderWidth:0
   },
   testHeader: {
-    marginTop: verticalScale(-40),
-    marginLeft: moderateScale(25),
+   // marginTop: verticalScale(-40),
+    marginLeft: moderateScale(30),
     fontSize: moderateScale(30),
     fontWeight:"700",
     color: COLOR_PRESETS.PRIMARY.DARK,
-    marginBottom: verticalScale(5),
+    marginBottom: verticalScale(15),
+    
   },
 
   testHeader1: {
@@ -69,7 +76,7 @@ export const styles = StyleSheet.create({
     marginBottom: verticalScale(10),
   },
   SingIn : {
-    marginTop: verticalScale(-4),
+    marginTop: verticalScale(30),
     marginLeft: moderateScale(75),
     //marginRight: moderateScale(10),
     borderWidth: 2,
@@ -94,7 +101,7 @@ export const styles = StyleSheet.create({
   },
   bottom :
   {
-    marginTop: verticalScale(25),
+    marginTop: verticalScale(50),
     marginLeft: moderateScale(25),
     flexDirection: "row",
     alignItems: "center",
