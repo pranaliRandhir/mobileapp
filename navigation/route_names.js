@@ -9,7 +9,8 @@ export class RouteNames {
     static LAB_SCHEDULE = 'LAB_SCHEDULE'; 
     static HOME = 'HOME';
     static SIGN_IN = 'SIGN_IN';
-    static SIGN_UP = 'SIGN_UP'; 
+    static SIGN_UP = 'SIGN_UP';
+    static ORDER = 'ORDER'; 
     static API_DEMO = 'API_DEMO';
 
 }

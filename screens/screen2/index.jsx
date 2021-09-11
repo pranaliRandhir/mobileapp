@@ -4,7 +4,7 @@
  */
 
 import React, { Component } from "react";
-import { Dimensions, Image, Text, View, FlatList } from "react-native";
+import { Dimensions, Image, Text, View, FlatList , TouchableOpacity} from "react-native";
 
 import Icon from "react-native-vector-icons/Fontisto";
 import { Input, Divider } from "react-native-elements";
@@ -13,7 +13,7 @@ import { Header, Footer } from "../../components";
 import { HealthOrbitImage } from "../../assets";
 import { styles } from "./styles";
 import ApiClient from "../../utils/api_client";
-
+import { RouteNames } from "../../navigation/route_names";
 import { COLOR_PRESETS } from "../../presets/colors";
 //import { SvgUri } from 'react-native-svg';
 
@@ -131,9 +131,6 @@ export class Screen2 extends Component {
                 style={[styles.cardImg, { marginLeft: 40 }]}
               />
             </View>
-
-
-
           </View>
 
         </View>

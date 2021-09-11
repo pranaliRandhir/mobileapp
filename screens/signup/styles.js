@@ -53,7 +53,8 @@ export const styles = StyleSheet.create({
     
   },
   CheckBox : {
-    borderWidth:0
+    borderWidth:0,
+    color:"blue",
   },
   testHeader: {
    // marginTop: verticalScale(-40),
@@ -62,6 +63,7 @@ export const styles = StyleSheet.create({
     fontWeight:"700",
     color: COLOR_PRESETS.PRIMARY.DARK,
     marginBottom: verticalScale(15),
+    textAlign:"center"
     
   },
 
@@ -81,7 +83,7 @@ export const styles = StyleSheet.create({
     //marginRight: moderateScale(10),
     borderWidth: 2,
     borderColor: COLOR_PRESETS.PRIMARY.DARK,
-    borderRadius: 25git commit -m "commit message"  ,
+    borderRadius: 25,
     height: verticalScale(40),
     borderBottomColor:COLOR_PRESETS.PRIMARY.DARK,
     borderBottomWidth: 2,

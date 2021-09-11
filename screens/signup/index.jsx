@@ -7,7 +7,8 @@
  import { Image, Text, View, FlatList, TouchableOpacity } from "react-native";
  
  import Icon from "react-native-vector-icons/Fontisto";
- import { Input, CheckBox } from "react-native-elements";
+ import { Input } from "react-native-elements";
+ import { CheckBox } from 'react-native-elements';
  
  import { Header, Footer } from "../../components";
  import { HealthOrbitImage } from "../../assets";
@@ -27,6 +28,7 @@
      this.state = {
        testList: [],
      };
+     
    }
  
    componentDidMount() {
@@ -39,7 +41,9 @@
    }
  
    renderBody() {
-     const { testList } = this.state;
+      const { testList } = this.state;
+      
+     
      return (
        <View style={{ flex: 1 }}>
          <View style={styles.logoContainer}>
@@ -73,12 +77,15 @@
            placeholder="Email Address"
           />
 
-          <Input
+          <Input  
+           keyboardType='numeric'
+           maxLength={10} 
            inputContainerStyle={styles.inputContainer}
            leftIconContainerStyle={styles.leftIconContainer}
            inputStyle={styles.input}
            containerStyle={styles.inputRootContainer}
            placeholder="Mobile No."
+           style={{color:"black"}}
           />
 
 
@@ -88,6 +95,10 @@
            inputStyle={styles.input}
            containerStyle={styles.inputRootContainer}
            placeholder="Password"
+           secureTextEntry={true} 
+           style={{color:"black"}}
+          //  maxLength={10} 
+           minLength={3} 
           />
 
 
@@ -95,9 +106,10 @@
             style={styles.CheckBox}
             title='By signing up you accept the terms of services and the privacy policy'
             checked={this.state.checked}
+            
           />
          
-          <TouchableOpacity onPress={() => {this.props.navigation.navigate(RouteNames.HOME)}}>
+          <TouchableOpacity onPress={() => {this.props.navigation.navigate(RouteNames.SIGN_IN)}}>
             <Text style={styles.SingIn}>Sign Up</Text>
           </TouchableOpacity>
 

@@ -4,7 +4,7 @@
  */
 
  import React, { Component } from "react";
- import { StyleSheet,Dimensions, Image, Text, View, FlatList} from "react-native";
+ import { StyleSheet,Dimensions, Image, Text, View, FlatList,TouchableOpacity } from "react-native";
  
  import Icon from "react-native-vector-icons/Fontisto";
  import { Input, Divider ,Button} from "react-native-elements";
@@ -15,6 +15,7 @@
  import ApiClient from "../../utils/api_client";
  
  import { COLOR_PRESETS } from "../../presets/colors";
+ import { RouteNames } from "../../navigation/route_names";
  //import { SvgUri } from 'react-native-svg';
  
  const DeviceWidth = Dimensions.get('window').width
@@ -204,6 +205,7 @@
  
    renderTestCard(item, index) {
      return (
+      <TouchableOpacity onPress={() => { this.props.navigation.navigate(RouteNames.ORDER, item) }} style={styles.cardRootContainer}>
        <View style={styles.cardRootContainer}>
          <View style={styles.cardContentContainer}>
            <View style={styles.cardHeaderContainer}>
@@ -306,6 +308,7 @@
          </View>
  
        </View>
+       </TouchableOpacity>
      );
    }
  
