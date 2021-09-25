@@ -31,11 +31,10 @@ export const styles = StyleSheet.create({
     borderColor: COLOR_PRESETS.PRIMARY.DARK,
     borderRadius: 10,
     height: verticalScale(30),
-    borderBottomColor:COLOR_PRESETS.PRIMARY.DARK,
+    borderBottomColor: COLOR_PRESETS.PRIMARY.DARK,
     borderBottomWidth: 1,
-    height:40,
-    paddingRight:2,
-  
+    height: 40,
+    paddingRight: 2,
   },
   leftIconContainer: {
     marginLeft: moderateScale(10),
@@ -69,37 +68,42 @@ export const styles = StyleSheet.create({
     backgroundColor: COLOR_PRESETS.PRIMARY.LIGHT,
     //width: (Dimensions.get("window").width - 3 * moderateScale(22)) / 2,
     borderRadius: 16,
-    width:"100%",
-    },
+    width: "100%",
+  },
+  CardRootContainer: {
+    marginVertical: moderateScale(11),
+    backgroundColor: COLOR_PRESETS.PRIMARY.DARK,
+    //width: (Dimensions.get("window").width - 3 * moderateScale(22)) / 2,
+    borderRadius: 16,
+    width: "100%",
+  },
   cardContentContainer: {
     padding: moderateScale(12),
   },
   cardHeaderContainer: {
     flexDirection: "row",
     alignItems: "center",
-    width:100
+    width: 100,
   },
   cardImg: {
     width: moderateScale(30),
     height: moderateScale(30),
     resizeMode: "contain",
   },
-  
+
   testName: {
     marginLeft: moderateScale(12),
     fontWeight: "bold",
     fontSize: moderateScale(12),
     //Width: 70,
-   
   },
-  Day : {
-    color:"white",
-    fontWeight:"bold"
+  Day: {
+    color: "white",
+    fontWeight: "bold",
   },
-  day :
-  {
-    paddingRight:5,
-    fontWeight:"bold"
+  day: {
+    paddingRight: 5,
+    fontWeight: "bold",
   },
   cardBodyContainer: {
     flexDirection: "row",
@@ -129,18 +133,18 @@ export const styles = StyleSheet.create({
   },
   tabStyle: {},
   scrollStyle: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     paddingLeft: 65,
     paddingRight: 65,
     // justifyContent: 'center',
   },
   tabBarTextStyle: {
     fontSize: 14,
-    fontWeight: 'normal',
+    fontWeight: "normal",
   },
   underlineStyle: {
     height: 3,
-    backgroundColor: 'red',
+    backgroundColor: "red",
     borderRadius: 3,
     width: 15,
   },
