@@ -3,9 +3,9 @@
  * description: the lab_schedule component
  */
 
- import React, { Component } from "react";
+ import React, {Component} from "react";
  import { StyleSheet,Dimensions, Image, Text, View, FlatList,TouchableOpacity } from "react-native";
- 
+ import ScrollableTabView, { DefaultTabBar, ScrollableTabBar } from 'react-native-scrollable-tab-view-forked'
  import Icon from "react-native-vector-icons/Fontisto";
  import { Input, Divider ,Button} from "react-native-elements";
  
@@ -20,28 +20,41 @@
  
  const DeviceWidth = Dimensions.get('window').width
  export class LabSchedule extends Component {
+  
    constructor(props) {
      super(props);
      this.state = {
        testList: [],
+       colorId:0
+      
      };
    }
- 
+   onPress = (id) => {
+    this.setState({colorId: id});
+   };
    componentDidMount() {
      const formData = new FormData();
      // console.log('the navigation params is>>>>>>', this.props.route.params);
      const testId = this.props.route.params.iTestId;
-     console.log('the navigation params is>>>>>>',  testId );
+     const testName = this.props.route.params.sName;
+     console.log('the navigation params is>>>>>>',  testName );
  
      formData.append("action", "getTests");
+     formData.append("id",testId);
+ 
+
  
      ApiClient.post("", formData).then(({ data }) => {
        this.setState({ testList: data });
+       
      });
+     
    }
  
    renderBody() {
      const { testList } = this.state;
+    
+     
      
    
      return (
@@ -72,8 +85,9 @@
            </View>
           
          </View>
- 
-         <View style={{
+
+
+            <View style={{
                flexDirection: 'row',
               //  justifyContent: 'center',
                //alignItems: 'center',
@@ -84,8 +98,8 @@
  
              }}>
             
-            
-                <View style={[styles.cardRootContainer,{width:80,backgroundColor: '#3c64a3',color:"white",borderBottomRightRadius:0,borderTopRightRadius:0}]}>
+            <TouchableOpacity style={[styles.cardRootContainer,{width:80,height:50,borderBottomRightRadius:0,borderTopRightRadius:0, backgroundColor: this.state.selectedButton === 'button1' ? '#3c64a3' : COLOR_PRESETS.PRIMARY.LIGHT}]}>
+                <View style={[styles.cardRootContainer,{width:80,marginTop:0,borderBottomRightRadius:0,borderTopRightRadius:0}]}>
                   <View style={styles.cardContentContainer}>
                   <View style={styles.cardHeaderContainer}>
                   <View style={{
@@ -110,7 +124,8 @@
                   </View>
                   </View>
                 </View>
-              
+              </TouchableOpacity>
+              <TouchableOpacity>
                 <View style={[styles.cardRootContainer,{width:80,borderRadius:0, borderStyle: 'solid',borderRightWidth: 2,borderRightColor: 'white',}]}>
                   <View style={styles.cardContentContainer}>
                   <View style={styles.cardHeaderContainer}>
@@ -136,6 +151,8 @@
                   </View>
                   </View>
                 </View>
+              </TouchableOpacity>
+              <TouchableOpacity>
                
                 <View style={[styles.cardRootContainer,{width:80,borderRadius:0, borderStyle: 'solid',borderRightWidth: 2,borderRightColor: 'white',}]}>
                   <View style={styles.cardContentContainer}>
@@ -162,6 +179,8 @@
                   </View>
                   </View>
                 </View>
+              </TouchableOpacity>
+              <TouchableOpacity>
                
                 <View style={[styles.cardRootContainer,{width:80,borderBottomLeftRadius:0,borderTopLeftRadius:0}]}>
                     <View style={styles.cardContentContainer}>
@@ -186,8 +205,7 @@
                     </View>
                    
                 </View>
-                
-                
+              </TouchableOpacity>
           </View>
            
  
@@ -313,6 +331,7 @@
    }
  
    render() {
+     
      return (
        <>
          <View style={styles.rootContainer}>

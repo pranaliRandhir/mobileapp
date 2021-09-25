@@ -22,15 +22,38 @@ import SvgUri from 'react-native-svg-uri';
 
 
 export class OrderScreen extends Component {
+  state = {
+    testName: "",
+    testPrice: "",
+    testArea : "",
+  };
   constructor(props) {
     super(props);
     this.state = {
       testList: [],
+      
     };
+    
   }
 
   componentDidMount() {
     const formData = new FormData();
+
+    const testId = this.props.route.params.iTestId;
+    const testName = this.props.route.params.sName;
+    const testPrice = this.props.route.params.sTestPrice;
+    const testArea =this.props.route.params.sTestArea;
+    this.setState({ 
+      testName: testName,
+      testPrice: testPrice,
+      testArea:testArea,
+
+    });
+    console.log('Test ID>>>>>>',  testId );
+    console.log('Test Name>>>>>>',  testName );
+    console.log('Test Price>>>>>>',  testPrice);
+    console.log('Test Location>>>>>>',  testArea);
+
     formData.append("action", "getTests");
 
     ApiClient.post("", formData).then(({ data }) => {
@@ -40,6 +63,8 @@ export class OrderScreen extends Component {
 
   renderBody() {
     const { testList } = this.state;
+   
+    
     return (
       <View style={{ flex: 1 }}>
         
@@ -62,11 +87,17 @@ export class OrderScreen extends Component {
               
                 <View>
                   <View>
-                    <Text style={styles.testName}>Name of the test</Text>
+                    <Text style={styles.testName}>{this.state.testName}</Text>
                   </View>
+                  
                   <View>
-                    <Text style={styles.priceText}>{"\u20B9"}3400</Text>
+                    <Text>{this.state.testArea}</Text>
                   </View>
+
+                  <View>
+                    <Text style={styles.priceText}>{"\u20B9"}{this.state.testPrice}</Text>
+                  </View>
+                  
                   <TouchableOpacity>
                     <Text style={styles.SingIn}>Buy Now</Text>
                   </TouchableOpacity>

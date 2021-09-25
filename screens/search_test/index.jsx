@@ -1,6 +1,6 @@
 /**
- * fileName: screen2/index.js
- * description: the screen2 component
+ * fileName: search_test/index.js
+ * description: the Search Test component
  */
 
 import React, { Component } from "react";
@@ -18,7 +18,7 @@ import { COLOR_PRESETS } from "../../presets/colors";
 //import { SvgUri } from 'react-native-svg';
 
 const DeviceWidth = Dimensions.get('window').width
-export class Screen2 extends Component {
+export class SearchTest extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,15 +28,20 @@ export class Screen2 extends Component {
 
   componentDidMount() {
     const formData = new FormData();
-     console.log('the navigation params is>>>>>>', this.props.route.params);
-    const testId = this.props.route.params.search;
-    console.log('the navigation params is>>>>>>',  testId );
+    //console.log('the navigation params is>>>>>>', this.props.route.params);
+    const search = this.props.route.params.search;
+    console.log('the navigation params Herrre>>>>>>');
+    console.log('the navigation params is>>>>>>',  search );
 
-    formData.append("action", "getTests");
+    formData.append("action", "getTestBySearch");
+    formData.append("search",search);
 
     ApiClient.post("", formData).then(({ data }) => {
       this.setState({ testList: data });
+
+      
     });
+    
   }
 
   renderBody() {
@@ -151,4 +156,4 @@ export class Screen2 extends Component {
   }
 }
 
-export default Screen2;
+export default SearchTest;

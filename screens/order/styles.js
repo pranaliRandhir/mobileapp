@@ -110,7 +110,7 @@ export const styles = StyleSheet.create({
   testName: {
     // marginLeft: moderateScale(12),
     fontWeight: "bold",
-    fontSize: moderateScale(12),
+    fontSize: moderateScale(16),
    
   },
   Day : {

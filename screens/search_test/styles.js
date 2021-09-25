@@ -92,15 +92,6 @@ export const styles = StyleSheet.create({
     //Width: 70,
    
   },
-  Day : {
-    color:"white",
-    fontWeight:"bold"
-  },
-  day :
-  {
-    paddingRight:5,
-    fontWeight:"bold"
-  },
   cardBodyContainer: {
     flexDirection: "row",
     width: "100%",
@@ -126,22 +117,5 @@ export const styles = StyleSheet.create({
     flex: 0.3,
     marginLeft: 4,
     justifyContent: "center",
-  },
-  tabStyle: {},
-  scrollStyle: {
-    backgroundColor: 'white',
-    paddingLeft: 65,
-    paddingRight: 65,
-    // justifyContent: 'center',
-  },
-  tabBarTextStyle: {
-    fontSize: 14,
-    fontWeight: 'normal',
-  },
-  underlineStyle: {
-    height: 3,
-    backgroundColor: 'red',
-    borderRadius: 3,
-    width: 15,
   },
 });

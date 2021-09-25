@@ -39,7 +39,8 @@ export class HomeScreen extends Component {
   }
 
   renderBody() {
-    const { testList } = this.state;
+    const { testList} = this.state;
+    
     return (
       <View style={{ flex: 1 }}>
         
@@ -61,7 +62,12 @@ export class HomeScreen extends Component {
           inputStyle={styles.input}
           containerStyle={styles.inputRootContainer}
           placeholder="Search for pathologies, laboratories"
-          leftIcon={<Icon name="search" size={18} color="gray" />}
+          leftIcon={<Icon name="search" size={18} color="gray"/>}
+         
+          onSubmitEditing={() =>{this.props.navigation.navigate(RouteNames.SEARCH_TEST,{
+            search: 'blood',
+            
+          })}}
         />
         <TouchableOpacity onPress={() => {this.props.navigation.navigate(RouteNames.SCREEN_2)}}>
           <Text style={styles.testHeader}>Top Diagnostic Test</Text>
