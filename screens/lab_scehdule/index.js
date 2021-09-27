@@ -13,10 +13,6 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import ScrollableTabView, {
-  DefaultTabBar,
-  ScrollableTabBar,
-} from "react-native-scrollable-tab-view-forked";
 import Icon from "react-native-vector-icons/Fontisto";
 import { Input, Divider, Button } from "react-native-elements";
 
@@ -30,14 +26,50 @@ import { RouteNames } from "../../navigation/route_names";
 //import { SvgUri } from 'react-native-svg';
 
 const DeviceWidth = Dimensions.get("window").width;
+
+class LabScheduleHelper {
+  static TOTAL_DAYS_TO_RENDER = 4;
+
+  /**
+   *
+   * @param  {Date} inputDate
+   * @returns string
+   */
+  static getDateStringFromDate(inputDate) {
+    const date = new Date(inputDate);
+    return (
+      date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+    );
+  }
+
+  /**
+   *
+   * @param  {Date} date
+   * @returns string
+   */
+  static getDayFromDate(date) {
+    const dateStrArray = new Date(date).toDateString().split(" ");
+    return dateStrArray[0];
+  }
+
+  /**
+   *
+   * @param  {Date} date
+   * @returns string
+   */
+  static getDisplayDateFromDate(date) {
+    const dateStrArray = new Date(date).toDateString().split(" ");
+    return `${dateStrArray[1]} ${dateStrArray[2]}`;
+  }
+}
+
 export class LabSchedule extends Component {
   today = new Date();
   selectionDates = [
     this.today,
-    new Date().setDate(this.today.getDate + 1),
-    new Date().setDate(this.today.getDate + 2),
-    new Date().setDate(this.today.getDate + 3),
-    new Date().setDate(this.today.getDate + 3),
+    new Date().setDate(this.today.getDate() + 1),
+    new Date().setDate(this.today.getDate() + 2),
+    new Date().setDate(this.today.getDate() + 3),
   ];
 
   constructor(props) {
@@ -45,7 +77,9 @@ export class LabSchedule extends Component {
     this.state = {
       testList: [],
       colorId: 0,
-      selectedDate: this.selectionDates[0],
+      selectedDate: LabScheduleHelper.getDateStringFromDate(this.today),
+      labId: 5,
+      selectedSlot: "11:00",
     };
   }
   onPress = (id) => {
@@ -110,7 +144,21 @@ export class LabSchedule extends Component {
           }}
         >
           {this.selectionDates.map((e, i) => (
-            <Days date={e} isToday={i === 0} isSelected={false} />
+            <Days
+              key={i}
+              date={e}
+              index={i}
+              isToday={i === 0}
+              onSelect={() =>
+                this.setState({
+                  selectedDate: LabScheduleHelper.getDateStringFromDate(e),
+                })
+              }
+              isSelected={
+                this.state.selectedDate ===
+                LabScheduleHelper.getDateStringFromDate(e)
+              }
+            />
           ))}
         </View>
 
@@ -267,60 +315,39 @@ const styles1 = StyleSheet.create({
 export default LabSchedule;
 
 const Days = (props) => {
-  const { date, isSelected, isToday } = props;
-  console.log("the date is>>>>>>>>>>>>>>>>>", date);
-  const dateStrArray = new Date(date).toDateString().split(" ");
-  const dayString = dateStrArray[0];
-  const dateString = `${dateStrArray[1]} ${dateStrArray[2]}`;
+  const { date, isSelected, isToday, index } = props;
 
   return (
     <TouchableOpacity
       style={[
-        isSelected ? styles.cardRootContainer : styles.CardRootContainer,
-        {
-          width: 80,
-          height: 50,
-          borderBottomRightRadius: 0,
-          borderTopRightRadius: 0,
-          backgroundColor:
-            this.state.selectedButton === "button1"
-              ? "#3c64a3"
-              : COLOR_PRESETS.PRIMARY.LIGHT,
-        },
+        isSelected ? styles.DayCardContainer : styles.dayCardContainer,
+        index === 0 ? styles.firstDayCard : {},
+        index === 3
+          ? styles.lastDayCard
+          : { borderRightWidth: 5, borderColor: "red" },
       ]}
+      onPress={() => props.onSelect()}
     >
-      <View
-        style={[
-          styles.cardRootContainer,
-          {
-            width: 80,
-            marginTop: 0,
-            borderBottomRightRadius: 0,
-            borderTopRightRadius: 0,
-          },
-        ]}
-      >
-        <View style={styles.cardContentContainer}>
-          <View style={styles.cardHeaderContainer}>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-                marginLeft: 50,
-              }}
-            >
-              <View>
-                <View style={{ width: DeviceWidth * 0.65 }}>
-                  <Text style={isSelected ? styles.Day : styles.day}>
-                    {isToday ? "Today" : dayString}
-                  </Text>
-                </View>
-                <View style={{ width: DeviceWidth * 0.65 }}>
-                  <Text style={isSelected ? styles.Day : styles.day}>
-                    {dateString}
-                  </Text>
-                </View>
+      <View style={styles.cardContentContainer}>
+        <View style={styles.cardHeaderContainer}>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+              marginLeft: 50,
+            }}
+          >
+            <View>
+              <View style={{ width: DeviceWidth * 0.65 }}>
+                <Text style={isSelected ? styles.Day : styles.day}>
+                  {isToday ? "Today" : LabScheduleHelper.getDayFromDate(date)}
+                </Text>
+              </View>
+              <View style={{ width: DeviceWidth * 0.65 }}>
+                <Text style={isSelected ? styles.Day : styles.day}>
+                  {LabScheduleHelper.getDisplayDateFromDate(date)}
+                </Text>
               </View>
             </View>
           </View>

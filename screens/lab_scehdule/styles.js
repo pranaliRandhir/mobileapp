@@ -104,6 +104,7 @@ export const styles = StyleSheet.create({
   day: {
     paddingRight: 5,
     fontWeight: "bold",
+    color: "black",
   },
   cardBodyContainer: {
     flexDirection: "row",
@@ -147,5 +148,22 @@ export const styles = StyleSheet.create({
     backgroundColor: "red",
     borderRadius: 3,
     width: 15,
+  },
+
+  dayCardContainer: {
+    width: moderateScale(80),
+    backgroundColor: COLOR_PRESETS.PRIMARY.LIGHT,
+  },
+  DayCardContainer: {
+    width: moderateScale(80),
+    backgroundColor: COLOR_PRESETS.PRIMARY.DARK,
+  },
+  firstDayCard: {
+    borderTopLeftRadius: moderateScale(14),
+    borderBottomLeftRadius: moderateScale(14),
+  },
+  lastDayCard: {
+    borderTopRightRadius: moderateScale(14),
+    borderBottomRightRadius: moderateScale(14),
   },
 });
