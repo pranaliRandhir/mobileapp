@@ -16,7 +16,6 @@ import ApiClient from "../../utils/api_client";
 
 import { COLOR_PRESETS } from "../../presets/colors";
 import { RouteNames } from "../../navigation/route_names";
-import SvgUri from "react-native-svg-uri";
 
 export class HomeScreen extends Component {
   constructor(props) {

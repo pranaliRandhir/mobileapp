@@ -5,7 +5,7 @@
  */
 import * as React from "react";
 
-import { NavigationContainer, DrawerActions } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
@@ -16,11 +16,7 @@ import SignUp from "../screens/signup";
 import LabSchedule from "../screens/lab_scehdule";
 import SearchTest from "../screens/search_test";
 import OrderScreen from "../screens/order";
-import APIDemo from "../screens/api-demo";
 import { DrawerScreens, RouteNames } from "./route_names";
-import { Icon } from "react-native-elements";
-import { COLOR_PRESETS } from "../presets/colors";
-import { Header } from "../components";
 import { AppStateContext } from "../providers/app-state/app-state.provider";
 
 export default function Navigation() {
