@@ -100,6 +100,12 @@ export class LabSchedule extends Component {
     });
   }
 
+  componentDidUpdate(_, prevState) {
+    if (prevState.selectedDate !== this.state.selectedDate) {
+      console.log("the date updated");
+    }
+  }
+
   renderBody() {
     const { testList } = this.state;
 

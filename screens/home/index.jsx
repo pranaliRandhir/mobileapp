@@ -122,7 +122,6 @@ export class HomeScreen extends Component {
     return (
       <>
         <View style={styles.rootContainer}>
-          <Header />
           {this.renderBody()}
           {/* <Footer /> */}
         </View>

@@ -8,10 +8,13 @@ import { View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
 import PropTypes from "prop-types";
-import { verticalScale } from "react-native-size-matters";
+import { moderateScale, verticalScale } from "react-native-size-matters";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { DrawerActions } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/core";
 
 import { COLOR_PRESETS } from "../../presets/colors";
+import { Icon } from "react-native-elements";
 
 /**
  * @exports Header
@@ -21,8 +24,9 @@ import { COLOR_PRESETS } from "../../presets/colors";
  * @returns {React.Component}
  * @example <Header backButton={true}/>
  */
-export const Header = ({ backButton }) => {
+export const Header = ({ leading }) => {
   const insets = useSafeAreaInsets();
+  const navigation = useNavigation();
 
   //TODO: implement the back button prop to show back button
 
@@ -31,10 +35,30 @@ export const Header = ({ backButton }) => {
       <StatusBar backgroundColor={COLOR_PRESETS.PRIMARY.BASE} />
       <View
         style={{
-          paddingTop: insets.top + verticalScale(40),
+          paddingTop: insets.top,
+          minHeight: verticalScale(72),
           backgroundColor: COLOR_PRESETS.PRIMARY.BASE,
+          flexDirection: "row",
+          alignItems: "center",
         }}
-      ></View>
+      >
+        <View
+          style={{
+            minWidth: moderateScale(48),
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Icon
+            name="menu"
+            color={COLOR_PRESETS.LIGHT.WHITE}
+            onPress={() => {
+              console.log("menu pressed");
+              navigation.dispatch(DrawerActions.openDrawer());
+            }}
+          />
+        </View>
+      </View>
     </>
   );
 };

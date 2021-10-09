@@ -10,6 +10,7 @@ const initialState = {
   },
   methods: {
     setToast: () => {},
+    setUser: () => {},
   },
 };
 
@@ -26,7 +27,7 @@ export default class AppStateContextProvider extends React.Component {
     super(props);
     this.state = {
       userState: {
-        userID: 1,
+        userID: undefined,
       },
       appState: {
         toastState: {},
@@ -34,6 +35,14 @@ export default class AppStateContextProvider extends React.Component {
     };
   }
 
+  /**
+   *
+   * @param {{
+   *   message?: string,
+   *   isActive?: boolean,
+   *   type?: ToastType
+   * }} toastState
+   */
   showToast(toastState) {
     this.setState(
       {
@@ -58,6 +67,14 @@ export default class AppStateContextProvider extends React.Component {
     );
   }
 
+  /**
+   *
+   * @param {{userID?: number}} user
+   */
+  setUser(user) {
+    this.setState({ userState: user });
+  }
+
   render() {
     return (
       <AppStateContext.Provider
@@ -65,6 +82,7 @@ export default class AppStateContextProvider extends React.Component {
           sharedState: this.state,
           methods: {
             setToast: (toastState) => this.showToast(toastState),
+            setUser: (user) => this.setUser(user),
           },
         }}
       >

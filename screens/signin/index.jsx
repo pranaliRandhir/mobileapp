@@ -3,117 +3,142 @@
  * description: the home screen component
  */
 
- import React, { Component } from "react";
- import { Image, Text, View, FlatList, TouchableOpacity } from "react-native";
- 
- import Icon from "react-native-vector-icons/Fontisto";
- import { Input, Divider } from "react-native-elements";
- 
- import { Header, Footer } from "../../components";
- import { HealthOrbitImage } from "../../assets";
- import { styles } from "./styles";
- import ApiClient from "../../utils/api_client";
- 
- import { COLOR_PRESETS } from "../../presets/colors";
- import { RouteNames } from "../../navigation/route_names";
-//  import SvgUri from 'react-native-svg-uri';
- 
- 
- 
+import React, { Component } from "react";
+import { Image, Text, View, FlatList, TouchableOpacity } from "react-native";
 
- export class SingIn extends Component {
-   constructor(props) {
-     super(props);
-     this.state = {
-       testList: [],
-     };
-   }
- 
-   componentDidMount() {
-     const formData = new FormData();
-     formData.append("action", "getTests");
- 
-     ApiClient.post("", formData).then(({ data }) => {
-       this.setState({ testList: data });
-     });
-   }
- 
-   renderBody() {
-     const { testList } = this.state;
-     return (
-       <View style={{ flex: 1 }}>
-         <View style={styles.logoContainer}>
-           
-           {/* <SvgUri 
-             width="200" 
-             height="200" 
+import Icon from "react-native-vector-icons/Fontisto";
+import { Input, Divider } from "react-native-elements";
+import { CommonActions } from "@react-navigation/routers";
+
+import { Header, Footer } from "../../components";
+import { HealthOrbitImage } from "../../assets";
+import { styles } from "./styles";
+import ApiClient from "../../utils/api_client";
+
+import { RouteNames } from "../../navigation/route_names";
+import {
+  AppStateContext,
+  ToastType,
+} from "../../providers/app-state/app-state.provider";
+//  import SvgUri from 'react-native-svg-uri';
+
+class SignInHelper {
+  static async loginUser(username, password) {
+    if (username === "a" && password === "b") {
+      return {
+        userID: 1,
+      };
+    } else {
+      throw new Error("Invalid username or password");
+    }
+  }
+}
+
+export class SingIn extends Component {
+  static contextType = AppStateContext;
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      password: "",
+    };
+  }
+
+  handleLogin = async () => {
+    const { username, password } = this.state;
+    const { methods } = this.context;
+    try {
+      const user = await SignInHelper.loginUser(username, password);
+      if (user?.userID) {
+        methods.setUser(user);
+      }
+      // this.props.navigation.dispatch(
+      //   CommonActions.reset({
+      //     index: 0,
+      //     routes: [{ name: RouteNames.LANDING }],
+      //   })
+      // );
+    } catch (error) {
+      methods.setToast({ message: error.message, type: ToastType.ERROR });
+    }
+  };
+
+  renderBody() {
+    const { testList } = this.state;
+    return (
+      <View style={{ flex: 1 }}>
+        <View style={styles.logoContainer}>
+          {/* <SvgUri
+             width="200"
+             height="200"
              source={{uri:'https://kigadel.com/gimonn/ic/Icons/Icon%20Logo.svg'}}
            /> */}
-           <Image source={HealthOrbitImage} style={styles.logoSize} />
-             
-         </View>
+          <Image source={HealthOrbitImage} style={styles.logoSize} />
+        </View>
 
-         <TouchableOpacity onPress={() => {this.props.navigation.navigate(RouteNames.SCREEN_2)}}>
-           <Text style={styles.testHeader}>Login</Text>
-         </TouchableOpacity>
+        <TouchableOpacity onPress={() => {}}>
+          <Text style={styles.testHeader}>Login</Text>
+        </TouchableOpacity>
 
-        
- 
-         <Input
-           inputContainerStyle={styles.inputContainer}
-           leftIconContainerStyle={styles.leftIconContainer}
-           inputStyle={styles.input}
-           containerStyle={styles.inputRootContainer}
-           placeholder="Email & Mobile No."
-          />
+        <Input
+          inputContainerStyle={styles.inputContainer}
+          leftIconContainerStyle={styles.leftIconContainer}
+          inputStyle={styles.input}
+          containerStyle={styles.inputRootContainer}
+          placeholder="Email & Mobile No."
+          onChangeText={(username) => this.setState({ username })}
+        />
 
+        <Input
+          inputContainerStyle={styles.inputContainer}
+          leftIconContainerStyle={styles.leftIconContainer}
+          inputStyle={styles.input}
+          containerStyle={styles.inputRootContainer}
+          placeholder="Password"
+          secureTextEntry
+          onChangeText={(password) => this.setState({ password })}
+        />
 
-          <Input
-           inputContainerStyle={styles.inputContainer}
-           leftIconContainerStyle={styles.leftIconContainer}
-           inputStyle={styles.input}
-           containerStyle={styles.inputRootContainer}
-           placeholder="Password"
-          />
+        <TouchableOpacity>
+          <Text style={styles.forget}>Forget Password?</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            this.handleLogin();
+          }}
+        >
+          <Text style={styles.SingIn}>Sign In</Text>
+        </TouchableOpacity>
 
-          <TouchableOpacity>
-           <Text style={styles.forget}>Forget Password?</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => {this.props.navigation.navigate(RouteNames.HOME)}}>
-            <Text style={styles.SingIn}>Sign In</Text>
-          </TouchableOpacity>
-
-          <View style={styles.bottom}>
-            <View style={{flex:0.5}}>
-              <Text>No account yet ? </Text>
-            </View>
-            <View style={{flex:1}}>
-            <TouchableOpacity onPress={() => {this.props.navigation.navigate(RouteNames.SIGN_UP)}}>
+        <View style={styles.bottom}>
+          <View style={{ flex: 0.5 }}>
+            <Text>No account yet ? </Text>
+          </View>
+          <View style={{ flex: 1 }}>
+            <TouchableOpacity
+              onPress={() => {
+                this.props.navigation.navigate(RouteNames.SIGN_UP);
+              }}
+            >
               <Text style={styles.signup}>SignUp </Text>
             </TouchableOpacity>
-            </View>
           </View>
-        
-       </View>
+        </View>
+      </View>
+    );
+  }
 
+  render() {
+    return (
+      <>
+        <View style={styles.rootContainer}>
+          <Header />
+          {this.renderBody()}
+          {/* <Footer /> */}
+        </View>
+      </>
+    );
+  }
+}
 
-
-     );
-   }
- 
-   
-   render() {
-     return (
-       <>
-         <View style={styles.rootContainer}>
-           <Header />
-           {this.renderBody()}
-           {/* <Footer /> */}
-         </View>
-       </>
-     );
-   }
- }
- 
- export default SingIn;
- 
+export default SingIn;

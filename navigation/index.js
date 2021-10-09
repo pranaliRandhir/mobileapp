@@ -5,8 +5,9 @@
  */
 import * as React from "react";
 
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, DrawerActions } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import Screen2 from "../screens/screen2";
 import HomeScreen from "../screens/home";
@@ -15,14 +16,23 @@ import SignUp from "../screens/signup";
 import LabSchedule from "../screens/lab_scehdule";
 import SearchTest from "../screens/search_test";
 import OrderScreen from "../screens/order";
-
 import APIDemo from "../screens/api-demo";
-import { RouteNames } from "./route_names";
+import { DrawerScreens, RouteNames } from "./route_names";
+import { Icon } from "react-native-elements";
+import { COLOR_PRESETS } from "../presets/colors";
+import { Header } from "../components";
+import { AppStateContext } from "../providers/app-state/app-state.provider";
 
 export default function Navigation() {
+  const context = React.useContext(AppStateContext);
   return (
     <NavigationContainer>
-      <RootNavigator />
+      {/* {context.sharedState.userState.userID ? (
+        <AppNavigator />
+      ) : (
+        <RootNavigator />
+      )} */}
+      <AppNavigator />
     </NavigationContainer>
   );
 }
@@ -31,20 +41,38 @@ export default function Navigation() {
 // Read more here: https://reactnavigation.org/docs/modal
 const Stack = createStackNavigator();
 
+const Drawer = createDrawerNavigator();
+
+function AppNavigator() {
+  return (
+    <Drawer.Navigator
+      initialRouteName={DrawerScreens.HOME}
+      screenOptions={{
+        header: ({ navigation, route, options }) => {
+          return <Header />;
+        },
+      }}
+    >
+      <Drawer.Screen name={DrawerScreens.HOME} component={HomeScreen} />
+      <Drawer.Screen name={DrawerScreens.SCREEN_2} component={Screen2} />
+      <Drawer.Screen
+        name={DrawerScreens.LAB_SCHEDULE}
+        component={LabSchedule}
+      />
+      <Drawer.Screen name={DrawerScreens.SEARCH_TEST} component={SearchTest} />
+      <Drawer.Screen name={DrawerScreens.ORDER} component={OrderScreen} />
+    </Drawer.Navigator>
+  );
+}
+
 function RootNavigator() {
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
       initialRouteName={RouteNames.SIGN_IN}
     >
-      <Stack.Screen name={RouteNames.SCREEN_2} component={Screen2} />
-      <Stack.Screen name={RouteNames.LAB_SCHEDULE} component={LabSchedule} />
-      <Stack.Screen name={RouteNames.SEARCH_TEST} component={SearchTest} />
-      <Stack.Screen name={RouteNames.HOME} component={HomeScreen} />
       <Stack.Screen name={RouteNames.SIGN_IN} component={SignIn} />
       <Stack.Screen name={RouteNames.SIGN_UP} component={SignUp} />
-      <Stack.Screen name={RouteNames.ORDER} component={OrderScreen} />
-      <Stack.Screen name={RouteNames.API_DEMO} component={APIDemo} />
     </Stack.Navigator>
   );
 }
