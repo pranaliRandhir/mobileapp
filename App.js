@@ -12,7 +12,6 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <AppStateContextProvider>
-        <StatusBar backgroundColor="red" />
         <Navigation />
 
         <AppToaster />

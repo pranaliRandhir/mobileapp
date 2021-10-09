@@ -27,32 +27,40 @@ export default function Navigation() {
   const context = React.useContext(AppStateContext);
   return (
     <NavigationContainer>
-      {/* {context.sharedState.userState.userID ? (
-        <AppNavigator />
-      ) : (
-        <RootNavigator />
-      )} */}
-      <AppNavigator />
+      <RootNavigator />
     </NavigationContainer>
   );
 }
 
 // A root stack navigator is often used for displaying modals on top of all other content
 // Read more here: https://reactnavigation.org/docs/modal
+
+// screenOptions={{
+//         header: ({ navigation, route, options }) => {
+//           return (
+//             <Header
+//               leading={
+//                 <Icon
+//                   name="menu"
+//                   color={COLOR_PRESETS.LIGHT.WHITE}
+//                   onPress={() => {
+//                     console.log("menu pressed");
+//                     navigation.dispatch(DrawerActions.openDrawer());
+//                   }}
+//                 />
+//               }
+//             />
+//           );
+//         },
+//       }}
+
 const Stack = createStackNavigator();
 
 const Drawer = createDrawerNavigator();
 
 function AppNavigator() {
   return (
-    <Drawer.Navigator
-      initialRouteName={DrawerScreens.HOME}
-      screenOptions={{
-        header: ({ navigation, route, options }) => {
-          return <Header />;
-        },
-      }}
-    >
+    <Drawer.Navigator initialRouteName={DrawerScreens.HOME}>
       <Drawer.Screen name={DrawerScreens.HOME} component={HomeScreen} />
       <Drawer.Screen name={DrawerScreens.SCREEN_2} component={Screen2} />
       <Drawer.Screen
@@ -73,6 +81,7 @@ function RootNavigator() {
     >
       <Stack.Screen name={RouteNames.SIGN_IN} component={SignIn} />
       <Stack.Screen name={RouteNames.SIGN_UP} component={SignUp} />
+      <Stack.Screen name={RouteNames.LANDING} component={AppNavigator} />
     </Stack.Navigator>
   );
 }

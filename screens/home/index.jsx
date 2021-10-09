@@ -122,6 +122,18 @@ export class HomeScreen extends Component {
     return (
       <>
         <View style={styles.rootContainer}>
+          <Header
+            leading={
+              <Icon
+                name="nav-icon-a"
+                color={COLOR_PRESETS.LIGHT.WHITE}
+                onPress={() => {
+                  console.log("menu pressed");
+                  this.props.navigation.toggleDrawer();
+                }}
+              />
+            }
+          />
           {this.renderBody()}
           {/* <Footer /> */}
         </View>

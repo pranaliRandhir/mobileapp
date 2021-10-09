@@ -49,14 +49,7 @@ export const Header = ({ leading }) => {
             justifyContent: "center",
           }}
         >
-          <Icon
-            name="menu"
-            color={COLOR_PRESETS.LIGHT.WHITE}
-            onPress={() => {
-              console.log("menu pressed");
-              navigation.dispatch(DrawerActions.openDrawer());
-            }}
-          />
+          {leading}
         </View>
       </View>
     </>

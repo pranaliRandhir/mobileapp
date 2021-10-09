@@ -52,12 +52,12 @@ export class SingIn extends Component {
       if (user?.userID) {
         methods.setUser(user);
       }
-      // this.props.navigation.dispatch(
-      //   CommonActions.reset({
-      //     index: 0,
-      //     routes: [{ name: RouteNames.LANDING }],
-      //   })
-      // );
+      this.props.navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{ name: RouteNames.LANDING }],
+        })
+      );
     } catch (error) {
       methods.setToast({ message: error.message, type: ToastType.ERROR });
     }
