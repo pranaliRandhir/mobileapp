@@ -32,28 +32,6 @@ export default function Navigation() {
   );
 }
 
-// A root stack navigator is often used for displaying modals on top of all other content
-// Read more here: https://reactnavigation.org/docs/modal
-
-// screenOptions={{
-//         header: ({ navigation, route, options }) => {
-//           return (
-//             <Header
-//               leading={
-//                 <Icon
-//                   name="menu"
-//                   color={COLOR_PRESETS.LIGHT.WHITE}
-//                   onPress={() => {
-//                     console.log("menu pressed");
-//                     navigation.dispatch(DrawerActions.openDrawer());
-//                   }}
-//                 />
-//               }
-//             />
-//           );
-//         },
-//       }}
-
 const Stack = createStackNavigator();
 
 const Drawer = createDrawerNavigator();
