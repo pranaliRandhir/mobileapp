@@ -15,7 +15,7 @@ import { styles } from "./styles";
 import ApiClient from "../../utils/api_client";
 
 import { COLOR_PRESETS } from "../../presets/colors";
-import { RouteNames } from "../../navigation/route_names";
+import { DrawerScreens } from "../../navigation/route_names";
 
 export class HomeScreen extends Component {
   constructor(props) {
@@ -59,14 +59,14 @@ export class HomeScreen extends Component {
           placeholder="Search for pathologies, laboratories"
           leftIcon={<Icon name="search" size={18} color="gray" />}
           onSubmitEditing={() => {
-            this.props.navigation.navigate(RouteNames.SEARCH_TEST, {
+            this.props.navigation.navigate(DrawerScreens.SEARCH_TEST, {
               search: searchText,
             });
           }}
         />
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate(RouteNames.SCREEN_2);
+            this.props.navigation.navigate(DrawerScreens.SCREEN_2);
           }}
         >
           <Text style={styles.testHeader}>Top Diagnostic Test</Text>
@@ -86,7 +86,7 @@ export class HomeScreen extends Component {
     return (
       <TouchableOpacity
         onPress={() => {
-          this.props.navigation.navigate(RouteNames.LAB_SCHEDULE, item);
+          this.props.navigation.navigate(DrawerScreens.LAB_SCHEDULE, item);
         }}
         style={styles.cardRootContainer}
       >

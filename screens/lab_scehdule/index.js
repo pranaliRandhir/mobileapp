@@ -22,7 +22,7 @@ import { styles } from "./styles";
 import ApiClient from "../../utils/api_client";
 
 import { COLOR_PRESETS } from "../../presets/colors";
-import { RouteNames } from "../../navigation/route_names";
+import { DrawerScreens } from "../../navigation/route_names";
 //import { SvgUri } from 'react-native-svg';
 
 const DeviceWidth = Dimensions.get("window").width;
@@ -183,7 +183,7 @@ export class LabSchedule extends Component {
     return (
       <TouchableOpacity
         onPress={() => {
-          this.props.navigation.navigate(RouteNames.ORDER, item);
+          this.props.navigation.navigate(DrawerScreens.ORDER, item);
         }}
         style={styles.cardRootContainer}
       >
