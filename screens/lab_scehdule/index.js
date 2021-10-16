@@ -86,15 +86,20 @@ export class LabSchedule extends Component {
     this.setState({ colorId: id });
   };
   componentDidMount() {
+    this.fetchLabSchedule();
+  }
+
+  fetchLabSchedule() {
     const formData = new FormData();
-    // console.log('the navigation params is>>>>>>', this.props.route.params);
     const testId = this.props.route.params.iTestId;
     const testName = this.props.route.params.sName;
-    console.log("the navigation params is>>>>>>", testName);
 
-    formData.append("action", "getTests");
+    formData.append("action", "getLabs");
     formData.append("id", testId);
-
+    formData.append(
+      "date",
+      LabScheduleHelper.getDayFromDate(new Date(this.state.selectedDate))
+    );
     ApiClient.post("", formData).then(({ data }) => {
       this.setState({ testList: data });
     });
@@ -102,7 +107,7 @@ export class LabSchedule extends Component {
 
   componentDidUpdate(_, prevState) {
     if (prevState.selectedDate !== this.state.selectedDate) {
-      console.log("the date updated");
+      this.fetchLabSchedule();
     }
   }
 
