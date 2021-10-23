@@ -23,6 +23,7 @@ import ApiClient from "../../utils/api_client";
 
 import { COLOR_PRESETS } from "../../presets/colors";
 import { DrawerScreens } from "../../navigation/route_names";
+import { moderateScale, verticalScale } from "react-native-size-matters";
 //import { SvgUri } from 'react-native-svg';
 
 const DeviceWidth = Dimensions.get("window").width;
@@ -94,25 +95,19 @@ export class LabSchedule extends Component {
     const testId = this.props.route.params.iTestId;
     const testName = this.props.route.params.sName;
 
-    formData.append("action", "getLabs");
-    formData.append("id", testId);
-    formData.append(
-      "date",
-      LabScheduleHelper.getDayFromDate(new Date(this.state.selectedDate))
-    );
+    formData.append("action", "getLabTestId");
+    formData.append("test_id", testId);
     ApiClient.post("", formData).then(({ data }) => {
       this.setState({ testList: data });
     });
   }
 
-  componentDidUpdate(_, prevState) {
-    if (prevState.selectedDate !== this.state.selectedDate) {
-      this.fetchLabSchedule();
-    }
-  }
-
   renderBody() {
-    const { testList } = this.state;
+    const { testList: originalList, selectedDate } = this.state;
+
+    const testList = originalList.filter((lab) => {
+      return lab[LabScheduleHelper.getDayFromDate(selectedDate)] === 1;
+    });
 
     return (
       <View style={{ flex: 1 }}>
@@ -175,10 +170,20 @@ export class LabSchedule extends Component {
 
         <FlatList
           data={testList}
-          numColumns={2}
+          keyExtractor={(item, index) => `${item.iTestLabId}-${index}`}
           renderItem={({ item, index }) => this.renderTestCard(item, index)}
           contentContainerStyle={styles.listContainer}
-          columnWrapperStyle={styles.columnWrapper}
+          ListEmptyComponent={() => {
+            return <View
+              style={{
+                minHeight: verticalScale(500),
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text>No labs Found</Text>
+            </View>;
+          }}
         />
       </View>
     );
@@ -210,7 +215,12 @@ export class LabSchedule extends Component {
               >
                 <View>
                   <View style={{ width: DeviceWidth * 0.65 }}>
-                    <Text style={styles.testName}>{item.sName}</Text>
+                    <Text style={styles.testName}>{item.lab_name}</Text>
+                    <Text
+                      style={[styles.testName, { fontSize: moderateScale(8) }]}
+                    >
+                      {item.sLocation}
+                    </Text>
                   </View>
 
                   <View
