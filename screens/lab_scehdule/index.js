@@ -22,7 +22,7 @@ import { styles } from "./styles";
 import ApiClient from "../../utils/api_client";
 
 import { COLOR_PRESETS } from "../../presets/colors";
-import { DrawerScreens ,RouteNames } from "../../navigation/route_names";
+import { DrawerScreens, RouteNames } from "../../navigation/route_names";
 import { moderateScale, verticalScale } from "react-native-size-matters";
 //import { SvgUri } from 'react-native-svg';
 
@@ -111,8 +111,7 @@ export class LabSchedule extends Component {
       return lab[LabScheduleHelper.getDayFromDate(selectedDate)] === 1;
     });
 
-
-    console.log("selected date is >>>>>>>>>>>>>>>>>>>>>",)
+    console.log("selected date is >>>>>>>>>>>>>>>>>>>>>");
 
     return (
       <View style={{ flex: 1 }}>
@@ -179,15 +178,17 @@ export class LabSchedule extends Component {
           renderItem={({ item, index }) => this.renderTestCard(item, index)}
           contentContainerStyle={styles.listContainer}
           ListEmptyComponent={() => {
-            return <View
-              style={{
-                minHeight: verticalScale(500),
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Text>No labs Found</Text>
-            </View>;
+            return (
+              <View
+                style={{
+                  minHeight: verticalScale(500),
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Text>No labs Found</Text>
+              </View>
+            );
           }}
         />
       </View>
@@ -198,7 +199,10 @@ export class LabSchedule extends Component {
     return (
       <TouchableOpacity
         onPress={() => {
-          this.props.navigation.navigate(RouteNames.ORDER, item);
+          this.props.navigation.navigate(RouteNames.ORDER, {
+            ...item,
+            selectedDate: this.state.selectedDate,
+          });
         }}
         style={styles.cardRootContainer}
       >
@@ -220,14 +224,17 @@ export class LabSchedule extends Component {
               >
                 <View>
                   <View style={{ width: DeviceWidth * 0.65 }}>
-                  <Text style={styles.testName}>Test Name : {item.sName}</Text>
-                  <Text style={styles.testName}>Lab Name : {item.lab_name}</Text>
-                  <Text
+                    <Text style={styles.testName}>
+                      Test Name : {item.sName}
+                    </Text>
+                    <Text style={styles.testName}>
+                      Lab Name : {item.lab_name}
+                    </Text>
+                    <Text
                       style={[styles.testName, { fontSize: moderateScale(8) }]}
                     >
-                      Location :   {item.sLocation}
+                      Location : {item.sLocation}
                     </Text>
-                    
                   </View>
 
                   <View
@@ -363,7 +370,7 @@ const Days = (props) => {
         index === 0 ? styles.firstDayCard : {},
         index === 3
           ? styles.lastDayCard
-          : { borderRightWidth: 3, borderColor:"white"},
+          : { borderRightWidth: 3, borderColor: "white" },
       ]}
       onPress={() => props.onSelect()}
     >
