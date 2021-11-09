@@ -111,7 +111,7 @@ export class LabSchedule extends Component {
       return lab[LabScheduleHelper.getDayFromDate(selectedDate)] === 1;
     });
 
-    console.log("selected date is >>>>>>>>>>>>>>>>>>>>>");
+    //console.log("selected date is >>>>>>>>>>>>>>>>>>>>>");
 
     return (
       <View style={{ flex: 1 }}>

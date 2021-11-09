@@ -26,11 +26,16 @@ import { COLOR_PRESETS } from "../../presets/colors";
 import { RouteNames } from "../../navigation/route_names";
 import SvgUri from "react-native-svg-uri";
 
+import { AppStateContext } from "../../providers/app-state/app-state.provider";
+
 export class OrderScreen extends Component {
+  static contextType = AppStateContext;
   state = {
     testName: "",
     testPrice: "",
     testArea: "",
+    testDate:"",
+    UserID: "",
   };
   constructor(props) {
     super(props);
@@ -41,27 +46,33 @@ export class OrderScreen extends Component {
 
   componentDidMount() {
     //const formData = new FormData();
+    const { sharedState } = this.context;
+
+    const userId = sharedState?.userState?.userID;
+    //console.log("User Id >>>>>>>>>>>>",userId);
 
     const testId = this.props.route.params.iTestId;
     const testName = this.props.route.params.sName;
     const labName = this.props.route.params.lab_name;
     const testPrice = this.props.route.params.sTestPrice;
     const testArea = this.props.route.params.sLocation;
-    const selectedDate = this.props.route.params.selectedDate;
+    const testDate = this.props.route.params.selectedDate;
 
     this.setState({
+      userId : sharedState?.userState?.userID,
       testName: testName,
       labName: labName,
       testPrice: testPrice,
       testArea: testArea,
+      testDate : testDate,
     });
-
+    console.log("User ID is here  >>>>>>", userId);
     console.log("Test ID>>>>>>", testId);
     console.log("Test Name>>>>>>", testName);
     console.log("Lab Name>>>>>>", labName);
     console.log("Test Price>>>>>>", testPrice);
     console.log("Test Location>>>>>>", testArea);
-    console.log("selected Test Date>>>>>>", selectedDate);
+    console.log("selected Test Date>>>>>>", testDate);
 
     // formData.append("action", "getTests");
 
@@ -78,10 +89,12 @@ export class OrderScreen extends Component {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        userId : 2,
         testName: this.props.route.params.sName,
         labName: this.props.route.params.lab_name,
         testPrice: this.props.route.params.sTestPrice,
         testArea: this.props.route.params.sLocation,
+        testDate: this.props.route.params.selectedDate,
       }),
     })
       .then((response) => response.json())
@@ -130,6 +143,10 @@ export class OrderScreen extends Component {
 
                     <View>
                       <Text>Location : {this.state.testArea}</Text>
+                    </View>
+
+                    <View>
+                      <Text>Date is  : {this.state.testDate}</Text>
                     </View>
 
                     <View>

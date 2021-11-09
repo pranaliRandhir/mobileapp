@@ -60,7 +60,7 @@ export const styles = StyleSheet.create({
     fontWeight:"700",
   },
   listContainer: {
-    marginHorizontal: moderateScale(22),
+    marginHorizontal: moderateScale(62),
     justifyContent: "space-between",
   },
   columnWrapper: {
@@ -68,11 +68,11 @@ export const styles = StyleSheet.create({
   },
   cardRootContainer: {
     marginVertical: moderateScale(1),
-    // marginHorizontal: moderateScale(10),
+   // marginHorizontal: moderateScale(10),
     backgroundColor: COLOR_PRESETS.PRIMARY.LIGHT,
-    width: (Dimensions.get("window").width - 3 * moderateScale(22)) / 2,
+    width: (Dimensions.get("window").width - 3 * moderateScale(32)) / 2,
     borderRadius: 16,
-    width:"90%",
+    width:"100%",
     marginLeft:20
     },
   cardContentContainer: {

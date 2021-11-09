@@ -47,6 +47,9 @@ export class SearchLab extends Component {
     ApiClient.post("", formData).then(({ data }) => {
       this.setState({ testList: data });
     });
+
+
+    
   }
 
   renderBody() {

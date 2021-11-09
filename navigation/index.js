@@ -5,6 +5,7 @@
  */
 import * as React from "react";
 import { View, Image, SafeAreaView,Linking,} from 'react-native';
+import { Input, Avatar, ListItem, Divider } from "react-native-elements";
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import { NavigationContainer } from "@react-navigation/native";
@@ -16,9 +17,11 @@ import { createDrawerNavigator ,DrawerContentScrollView,
 import Screen2 from "../screens/screen2";
 import HomeScreen from "../screens/home";
 import Profile from "../screens/profile";
+import ProfileEdit from "../screens/edit_profile";
 import SignIn, { SingIn } from "../screens/signin";
 import SignUp from "../screens/signup";
 import ForgetPassword from "../screens/forget_password";
+import ChangePassword from "../screens/change_password";
 import LabSchedule from "../screens/lab_scehdule";
 import SearchTest from "../screens/search_test";
 import SearchLab from "../screens/search_lab";
@@ -27,6 +30,7 @@ import { HealthOrbitImage } from "../assets";
 import { DrawerScreens, RouteNames } from "./route_names";
 import { AppStateContext } from "../providers/app-state/app-state.provider";
 import { COLOR_PRESETS } from "../presets/colors";
+
 
 
 export default function Navigation() {
@@ -48,13 +52,18 @@ const CustomSidebarMenu = (props) => {
   
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    
+    <SafeAreaView style={{flex: 1,backgroundColor:"#EFF5FD",}}>
       {/*Top Large Image */}
-      <Image
-        source={ HealthOrbitImage }
-        style = {{marginTop : 100,marginLeft:30}}
-       
-      />
+      <View style={{backgroundColor:"#EFF5FD",height:270,marginBottom:-46}}>
+
+        <Image
+          source={ HealthOrbitImage }
+          style = {{marginTop : 80,marginLeft:30}}
+          resizeMode="cover"
+        
+        />
+      </View>
       <DrawerContentScrollView {...props}>
         <DrawerItemList {...props} />
        
@@ -95,7 +104,8 @@ function AppNavigator() {
     <Drawer.Navigator
       drawerContentOptions={{
         activeTintColor: COLOR_PRESETS.LIGHT.LIGHT,
-        itemStyle: {marginVertical: 5},
+        itemStyle: {marginVertical: 5,marginHorizontal:1},
+        
       }}
       drawerContent={(props) => <CustomSidebarMenu {...props} />}>
       <Drawer.Screen
@@ -116,6 +126,15 @@ function AppNavigator() {
            ),
         }}
         component={Profile}
+      />
+       <Drawer.Screen
+        name="Change Password"
+        options={{drawerLabel: 'Change Password',
+        drawerIcon: ({color}) => (
+          <Icon name="user" size={20} color={color} />
+           ),
+        }}
+        component={ChangePassword}
       />
       
       <Drawer.Screen
@@ -151,6 +170,7 @@ function RootNavigator() {
       <Stack.Screen name={RouteNames.SEARCH_LAB} component={SearchLab} />
       <Stack.Screen name={RouteNames.SEARCH_TEST} component={SearchTest} />
       <Stack.Screen name={RouteNames.ORDER} component={OrderScreen} />
+      <Stack.Screen name={RouteNames.PROFILE_EDIT} component={ProfileEdit} />
       <Stack.Screen name={RouteNames. FORGET_PASSWORD} component={ForgetPassword} />
       <Stack.Screen name={RouteNames.LANDING} component={AppNavigator} />
     </Stack.Navigator>

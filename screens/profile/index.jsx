@@ -5,6 +5,7 @@
 
 import React, { Component } from "react";
 import {
+  Dimensions,
   Image,
   Text,
   View,
@@ -28,17 +29,22 @@ import { AppStateContext } from "../../providers/app-state/app-state.provider";
 import { COLOR_PRESETS } from "../../presets/colors";
 import { RouteNames } from "../../navigation/route_names";
 //  import SvgUri from 'react-native-svg-uri';
-
+const DeviceWidth = Dimensions.get("window").width;
 export class Profile extends Component {
   static contextType = AppStateContext;
   constructor(props) {
     super(props);
 
     this.state = {
+      orderList: [],
       UserName: "",
       UserEmail: "",
       UserMobile: "",
+      UserName1: "",
+      UserEmail1: "",
+      UserMobile1: "",
       UserID: "",
+    
     };
   }
 
@@ -46,15 +52,15 @@ export class Profile extends Component {
     const { sharedState } = this.context;
 
     const user_id = sharedState?.userState?.userID;
-    console.log("the sharedState component is >>>>>>>>>>>>>>>>", user_id);
+    //console.log("the sharedState component is >>>>>>>>>>>>>>>>", user_id);
     const formData = new FormData();
     formData.append("action", "getUserProfile");
     formData.append("user_id", user_id);
     ApiClient.post("", formData).then(({ data }) => {
-      const UserName = data.user_name;
-      const UserEmail = data.user_email;
-      const UserMobile = data.user_mobile;
-      this.setState({ UserName, UserEmail, UserMobile, UserID: user_id });
+      const UserName1 = data.user_name;
+      const UserEmail1= data.user_email;
+      const UserMobile1 = data.user_mobile;
+      this.setState({ UserName1, UserEmail1, UserMobile1, UserID: user_id });
       //  console.log("the data is>>>>>>",data);
 
       //  const data1=data;
@@ -63,13 +69,26 @@ export class Profile extends Component {
       //  const useremail=data1.user_email;
       //  const usermobile=data1.user_mobile;
     });
+
+    const formData1 = new FormData();
+    
+    formData1.append("action", "getUserOrder");
+    
+    formData1.append("user_id", user_id);
+    //console.log("formData1 is >>>>>>>>>>>>>>>>>>>>>>>>>",formData1);
+    //console.log("Order List is >>>>>>>>>>>>>>>>>>>>>>>>>",user_id);
+    ApiClient.post("", formData1).then(({ data }) => {
+      console.log("Order List is >>>>>>>>>>>>>>>>>>>>>>>>>",data);
+      this.setState({ orderList: data});
+      
+    });
   }
 
   UserUpdateFunction = () => {
     const { UserName } = this.state;
-    const { UserEmail } = this.state;
-    const { UserMobile } = this.state;
-    const { UserID } = this.state;
+    const { UserEmail1 } = this.state;
+    const { UserMobile1} = this.state;
+    //const { UserID } = this.state;
 
     fetch("https://engistack.com/dm/user/user_update.php", {
       method: "POST",
@@ -80,11 +99,11 @@ export class Profile extends Component {
       body: JSON.stringify({
         name: UserName,
 
-        email: UserEmail,
+        email: UserEmail1,
 
-        mobile: UserMobile,
+        mobile: UserMobile1,
 
-        user_id: UserID,
+        //user_id: UserID,
       }),
     })
       .then((response) => response.json())
@@ -98,11 +117,11 @@ export class Profile extends Component {
   };
 
   renderBody() {
-    const { UserID, UserName, UserEmail, UserMobile } = this.state;
+    const { UserID, UserName1, UserEmail1, UserMobile1,orderList,UserName, UserEmail, UserMobile } = this.state;
     return (
       <ScrollView>
         <ListItem
-          containerStyle={{ marginRight: 150, marginLeft: 10, marginTop: 15 }}
+          containerStyle={{  marginLeft: 0, marginTop: 15 }}
         >
           <Avatar
             size="large"
@@ -111,106 +130,99 @@ export class Profile extends Component {
               uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREAPz94ukJs5rp_nNbrA2ijjLzruxMZ7wrV7Kei3PckuK_wKvQYgJwpMpDBCuaXZx0t3Q&usqp=CAU",
             }}
           />
-          <ListItem.Content>
-            <ListItem.Title style={{ fontSize: 25, fontWeight: "bold" }}>
-              {UserName}
+          <ListItem.Content style={{width:200}}>
+            <ListItem.Title style={{ fontSize: 15, fontWeight: "bold" }}>
+              <Text>
+                {UserName1}
+              </Text>
+            </ListItem.Title>
+            <ListItem.Title style={{ fontSize: 15, fontWeight: "bold" }}>
+              <Text>
+               {UserEmail1}
+              </Text>
+            </ListItem.Title>
+            <ListItem.Title style={{ fontSize: 15, fontWeight: "bold" }}>
+              <Text>
+               +91 {UserMobile1}
+              </Text>
             </ListItem.Title>
           </ListItem.Content>
+
+
+          <Avatar
+            size="small"
+            containerStyle={{ marginLeft: 20, marginTop: 5}}
+            source={{
+              uri: "https://www.freeiconspng.com/uploads/edit-png-icon-blue-pencil-18.png",
+            }}
+            onPress={() => console.log("Works!")} onPress={() => {
+              this.props.navigation.navigate(RouteNames.PROFILE_EDIT);
+            }}
+          />
         </ListItem>
+
+       
 
         <Divider orientation="horizontal" />
 
+
+
         <View style={{ flex: 1 }}>
-          <TouchableOpacity
-            onPress={() => {
-              this.props.navigation.navigate(RouteNames.SCREEN_2);
-            }}
-          >
-            <Text style={styles.testHeader}></Text>
-          </TouchableOpacity>
-
-          <Input
-            inputContainerStyle={styles.inputContainer}
-            leftIconContainerStyle={styles.leftIconContainer}
-            inputStyle={styles.input}
-            containerStyle={styles.inputRootContainer}
-            placeholder="User Id"
-            value={UserID}
-            onChangeText={(UserID) => {
-              this.setState({ UserID });
-            }}
+          <Text style={styles.testHeader}>Ordered Details</Text>
+          <FlatList
+            data={orderList}
+            renderItem={({ item, index }) => this.renderTestCard(item, index)}
+            contentContainerStyle={styles.listContainer}
           />
-          <Input
-            inputContainerStyle={styles.inputContainer}
-            leftIconContainerStyle={styles.leftIconContainer}
-            inputStyle={styles.input}
-            containerStyle={styles.inputRootContainer}
-            placeholder="User Name"
-            value={UserName}
-            onChangeText={(UserName) => this.setState({ UserName })}
-          />
-
-          <Input
-            inputContainerStyle={styles.inputContainer}
-            leftIconContainerStyle={styles.leftIconContainer}
-            inputStyle={styles.input}
-            containerStyle={styles.inputRootContainer}
-            placeholder="User Email ID"
-            value={UserEmail}
-            onChangeText={(UserEmail) => this.setState({ UserEmail })}
-          />
-
-          <Input
-            inputContainerStyle={styles.inputContainer}
-            leftIconContainerStyle={styles.leftIconContainer}
-            inputStyle={styles.input}
-            containerStyle={styles.inputRootContainer}
-            placeholder="User Mobile Number"
-            value={UserMobile}
-            onChangeText={(UserMobile) => this.setState({ UserMobile })}
-          />
-          {/* <Text h3 style={{marginLeft:30}}>Registeration Package</Text>
-           <View style={{ flexDirection: 'column'}}>
-
-             <View style={{ flexDirection: 'row',marginLeft:25 }}>
-               <CheckBox
-                 value={this.state.checked}
-                 onValueChange={() => this.setState({ checked: !this.state.checked })}
-               />
-
-               <Text style={{marginTop: 5}}> 1 Month</Text>
-             </View>
-           </View>
-           <View style={{ flexDirection: 'column'}}>
-
-             <View style={{ flexDirection: 'row',marginLeft:25 }}>
-               <CheckBox
-                 value={this.state.checked1}
-                 onValueChange={() => this.setState({ checked1: !this.state.checked1 })}
-               />
-
-               <Text style={{marginTop: 5}}> 6 Months</Text>
-             </View>
-           </View>
-           <View style={{ flexDirection: 'column'}}>
-
-             <View style={{ flexDirection: 'row',marginLeft:25 }}>
-               <CheckBox
-                 value={this.state.checked2}
-                 onValueChange={() => this.setState({ checked2: !this.state.checked2 })}
-               />
-
-               <Text style={{marginTop: 5}}> 1 Year</Text>
-             </View>
-           </View> */}
-
-          <TouchableOpacity onPress={this.UserUpdateFunction}>
-            <Text style={styles.SingIn}>Edit Profile</Text>
-          </TouchableOpacity>
         </View>
+
+        
       </ScrollView>
     );
   }
+  
+
+  renderTestCard(item, index) {
+    return (
+      <TouchableOpacity
+      
+        style={styles.cardRootContainer}
+      >
+        <View style={styles.cardRootContainer}>
+          <View style={styles.cardContentContainer}>
+            <View style={styles.cardHeaderContainer}>
+             
+              <View
+                style={{
+                  flexDirection: "row",
+                  // justifyContent: "center",
+                  // alignItems: "center",
+                  // marginLeft: 50,
+                }}
+              >
+                <View>
+                  <View style={{ width: DeviceWidth * 0.65 }}>
+                    <Text style={styles.testName}>Test Name :  {item.test_name}</Text>
+                    
+                  </View>
+                  <View style={{ width: DeviceWidth * 0.65, marginLeft: 0,marginTop:10 }}>
+                    <Text style={styles.testName}>Lab Name: {item.lab_name}</Text>
+                    <Text style={styles.testName}>Location: {item.location}</Text>
+                    <Text style={styles.testName}>Cost: {item.price}</Text>
+                    <Text style={styles.testName}>Date: {item.date}</Text>
+                  </View>
+                  
+                </View>
+              </View>
+              {/* </View> */}
+             
+            </View>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  }
+
 
   render() {
     return (

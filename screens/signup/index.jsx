@@ -91,6 +91,7 @@
     if (reg.test(userName) === false) {
      
       this.setState({UserNameValidate: "Enter Valid Username"})
+      this.setState({UserName: userName})
       //return false;
     }
     else {
@@ -104,12 +105,15 @@
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
     if (reg.test(UserEmail) === false) {
      
-      this.setState({ UserEmailValidate: "Inavalid Email ID"})
+      this.setState({ UserEmailValidate: "Invalid Email ID"})
+      this.setState({ UserEmail: UserEmail})
+
       //return false;
     }
     else {
       this.setState({ UserEmailValidate: "Email is Valid"})
-      
+      this.setState({ UserEmail: UserEmail})
+
     }
 
   }
@@ -120,10 +124,12 @@
     if (reg.test(usermobile) === false) {
      
       this.setState({UserMobileValidate: "Enter Valid Mobile number"})
+      this.setState({UserMobile: usermobile})
       //return false;
     }
     else {
       this.setState({UserMobileValidate: "Mobile  Valid"})
+      this.setState({UserMobile: usermobile})
       
     }
 
@@ -183,7 +189,7 @@
            //onChangeText={UserEmail => this.setState({UserEmail})}
            onChangeText={(UserEmail) => this.email_validate(UserEmail)}
           />
-          {this.state.UserEmailValidate == "Inavalid Email ID" && this.state.UserEmailValidate.length > 0 && <Text style={styles.inputError}>{this.state.UserEmailValidate}</Text>}
+          {this.state.UserEmailValidate == "Invalid Email ID" && this.state.UserEmailValidate.length > 0 && <Text style={styles.inputError}>{this.state.UserEmailValidate}</Text>}
           <Input  
            keyboardType='numeric'
            maxLength={10} 

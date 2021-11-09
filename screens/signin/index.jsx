@@ -178,11 +178,11 @@
            style={{ color: "black" }}
            //  maxLength={10}
            minLength={2}
-           //onChangeText={(password) => this.setState({ password })}
-           onChangeText={(password) => this.password_validate(password)}
+           onChangeText={(password) => this.setState({ password })}
+           //onChangeText={(password) => this.password_validate(password)}
          />
 
-        {this.state.passwordValidate && <Text style={styles.inputError}>{this.state.passwordValidate}</Text>}
+        {/* {this.state.passwordValidate && <Text style={styles.inputError}>{this.state.passwordValidate}</Text>} */}
  
          <View
            style={{

@@ -57,7 +57,8 @@ export const styles = StyleSheet.create({
     color:"blue",
   },
   testHeader: {
-    marginTop: verticalScale(30),
+    marginTop: verticalScale(50),
+    marginLeft: moderateScale(30),
     fontSize: moderateScale(20),
     fontWeight:"700",
     color: COLOR_PRESETS.PRIMARY.DARK,

@@ -13,9 +13,11 @@ export class RouteNames {
   static SEARCH_TEST = "SEARCH_TEST";
   static SEARCH_LAB = "SEARCH_LAB";
   static ORDER = "ORDER";
+  static PROFILE_EDIT = "PROFILE_EDIT";
 }
 
 export class DrawerScreens {
   static HOME = "HOME";
   static PROFILE = "PROFILE";
+  static CHANHGE_PASSWORD = "CHANGE_PASSWORD";
 }
