@@ -73,7 +73,6 @@ export class Profile extends Component {
     const formData1 = new FormData();
     
     formData1.append("action", "getUserOrder");
-    
     formData1.append("user_id", user_id);
     //console.log("formData1 is >>>>>>>>>>>>>>>>>>>>>>>>>",formData1);
     //console.log("Order List is >>>>>>>>>>>>>>>>>>>>>>>>>",user_id);

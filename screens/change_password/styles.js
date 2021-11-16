@@ -28,10 +28,11 @@ export const styles = StyleSheet.create({
   },
   inputContainer: {
     borderWidth: 2,
-    borderColor: COLOR_PRESETS.PRIMARY.DARK,
-    borderRadius: 10,
-    height: verticalScale(30),
-    borderBottomColor:COLOR_PRESETS.PRIMARY.DARK,
+    backgroundColor: COLOR_PRESETS.PRIMARY.LIGHT,
+    borderRadius: 25,
+    height: verticalScale(40),
+    borderBottomColor:COLOR_PRESETS.PRIMARY.LIGHT,
+    borderColor:COLOR_PRESETS.PRIMARY.LIGHT,
     borderBottomWidth: 2,
   },
   leftIconContainer: {
