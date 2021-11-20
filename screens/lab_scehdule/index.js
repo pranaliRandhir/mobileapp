@@ -24,6 +24,8 @@ import ApiClient from "../../utils/api_client";
 import { COLOR_PRESETS } from "../../presets/colors";
 import { DrawerScreens, RouteNames } from "../../navigation/route_names";
 import { moderateScale, verticalScale } from "react-native-size-matters";
+import { routeNames } from "../home/router";
+import { DrawerActions } from "@react-navigation/routers";
 //import { SvgUri } from 'react-native-svg';
 
 const DeviceWidth = Dimensions.get("window").width;
@@ -199,7 +201,7 @@ export class LabSchedule extends Component {
     return (
       <TouchableOpacity
         onPress={() => {
-          this.props.navigation.navigate(RouteNames.ORDER, {
+          this.props.navigation.navigate(routeNames.ORDER, {
             ...item,
             selectedDate: this.state.selectedDate,
           });
@@ -326,7 +328,7 @@ export class LabSchedule extends Component {
                 style={styles.toggleDrawer}
                 onPress={() => {
                   console.log("menu pressed");
-                  this.props.navigation.toggleDrawer();
+                  this.props.navigation.dispatch(DrawerActions.toggleDrawer());
                 }}
               />
             }

@@ -18,6 +18,7 @@ import { AppStateContext } from "../../providers/app-state/app-state.provider";
 
 import { COLOR_PRESETS } from "../../presets/colors";
 import { DrawerScreens ,RouteNames} from "../../navigation/route_names";
+import { routeNames } from "./router";
 
 export class HomeScreen extends Component {
   static contextType = AppStateContext;
@@ -31,7 +32,7 @@ export class HomeScreen extends Component {
 
   componentDidMount() {
     const { sharedState } = this.context;
-    
+
     const user_id = sharedState?.userState?.userID;
     console.log(
       "the sharedState component is >>>>>>>>>>>>>>>>",
@@ -96,7 +97,7 @@ export class HomeScreen extends Component {
     return (
       <TouchableOpacity
         onPress={() => {
-          this.props.navigation.navigate(RouteNames.LAB_SCHEDULE, item);
+          this.props.navigation.navigate(routeNames.LAB_SCHEDULE, item);
         }}
         style={styles.cardRootContainer}
       >

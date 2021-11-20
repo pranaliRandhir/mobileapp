@@ -4,15 +4,18 @@
  *
  */
 import * as React from "react";
-import { View, Image, SafeAreaView,Linking,} from 'react-native';
+import { View, Image, SafeAreaView, Linking } from "react-native";
 import { Input, Avatar, ListItem, Divider } from "react-native-elements";
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import Icon from "react-native-vector-icons/FontAwesome5";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { createDrawerNavigator ,DrawerContentScrollView,
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
   DrawerItemList,
-  DrawerItem, } from "@react-navigation/drawer";
+  DrawerItem,
+} from "@react-navigation/drawer";
 
 import Screen2 from "../screens/screen2";
 import HomeScreen from "../screens/home";
@@ -30,8 +33,7 @@ import { HealthOrbitImage } from "../assets";
 import { DrawerScreens, RouteNames } from "./route_names";
 import { AppStateContext } from "../providers/app-state/app-state.provider";
 import { COLOR_PRESETS } from "../presets/colors";
-
-
+import { HomeNavigator } from "../screens/home/router";
 
 export default function Navigation() {
   const context = React.useContext(AppStateContext);
@@ -46,45 +48,32 @@ const Stack = createStackNavigator();
 
 const Drawer = createDrawerNavigator();
 
-
-
 const CustomSidebarMenu = (props) => {
-  
-
   return (
-    
-    <SafeAreaView style={{flex: 1,backgroundColor:"#EFF5FD",}}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#EFF5FD" }}>
       {/*Top Large Image */}
-      <View style={{backgroundColor:"#EFF5FD",height:270,marginBottom:-46}}>
-
+      <View
+        style={{ backgroundColor: "#EFF5FD", height: 270, marginBottom: -46 }}
+      >
         <Image
-          source={ HealthOrbitImage }
-          style = {{marginTop : 80,marginLeft:30}}
+          source={HealthOrbitImage}
+          style={{ marginTop: 80, marginLeft: 30 }}
           resizeMode="cover"
-        
         />
       </View>
       <DrawerContentScrollView {...props}>
         <DrawerItemList {...props} />
-       
-       
       </DrawerContentScrollView>
-     
     </SafeAreaView>
   );
 };
 
-
-
 function AppNavigator() {
-  
   return (
-  
     // <Drawer.Navigator initialRouteName={DrawerScreens.HOME}
-    
+
     // drawerContent={(props) => <CustomSidebarMenu {...props} />}>
-    
-       
+
     //   <Drawer.Screen name={DrawerScreens.HOME} component={HomeScreen} />
     //   <Drawer.Screen name={DrawerScreens.PROFILE} component={Profile} />
     //   {/* <Drawer.Screen name="LOGOUT" /> */}
@@ -97,63 +86,58 @@ function AppNavigator() {
     //   <Drawer.Screen name={DrawerScreens.SEARCH_LAB} component={SearchLab} />
     //   <Drawer.Screen name={DrawerScreens.ORDER} component={OrderScreen} />
 
-      
     // </Drawer.Navigator>
 
-    
     <Drawer.Navigator
       drawerContentOptions={{
         activeTintColor: COLOR_PRESETS.LIGHT.LIGHT,
-        itemStyle: {marginVertical: 5,marginHorizontal:1},
-        
+        itemStyle: { marginVertical: 5, marginHorizontal: 1 },
       }}
-      drawerContent={(props) => <CustomSidebarMenu {...props} />}>
+      drawerContent={(props) => <CustomSidebarMenu {...props} />}
+    >
       <Drawer.Screen
         name="Home"
-        options={{drawerLabel: 'Home',
+        options={{
+          drawerLabel: "Home",
 
-        drawerIcon: ({color}) => (
-          <Icon name="home" size={20} color={color} />
-           ),
+          drawerIcon: ({ color }) => (
+            <Icon name="home" size={20} color={color} />
+          ),
         }}
-        component={HomeScreen}
+        component={HomeNavigator}
       />
       <Drawer.Screen
         name="Profile"
-        options={{drawerLabel: 'Profile',
-        drawerIcon: ({color}) => (
-          <Icon name="user" size={20} color={color} />
-           ),
+        options={{
+          drawerLabel: "Profile",
+          drawerIcon: ({ color }) => (
+            <Icon name="user" size={20} color={color} />
+          ),
         }}
         component={Profile}
       />
-       <Drawer.Screen
+      <Drawer.Screen
         name="Change Password"
-        options={{drawerLabel: 'Change Password',
-        drawerIcon: ({color}) => (
-          <Icon name="user" size={20} color={color} />
-           ),
+        options={{
+          drawerLabel: "Change Password",
+          drawerIcon: ({ color }) => (
+            <Icon name="user" size={20} color={color} />
+          ),
         }}
         component={ChangePassword}
       />
-      
+
       <Drawer.Screen
         name="Logout"
-        options={{drawerLabel: 'Logout',
-        drawerIcon: ({color}) => (
-          <Icon name="sign-out-alt" size={20} color={color} />
-           ),
-        
+        options={{
+          drawerLabel: "Logout",
+          drawerIcon: ({ color }) => (
+            <Icon name="sign-out-alt" size={20} color={color} />
+          ),
         }}
         component={SingIn}
       />
-      
-
     </Drawer.Navigator>
- 
-   
-  
-    
   );
 }
 
@@ -165,13 +149,13 @@ function RootNavigator() {
     >
       <Stack.Screen name={RouteNames.SIGN_IN} component={SignIn} />
       <Stack.Screen name={RouteNames.SIGN_UP} component={SignUp} />
-      <Stack.Screen name={RouteNames.SCREEN_2} component={Screen2} />
-      <Stack.Screen name={RouteNames.LAB_SCHEDULE} component={LabSchedule} />
       <Stack.Screen name={RouteNames.SEARCH_LAB} component={SearchLab} />
       <Stack.Screen name={RouteNames.SEARCH_TEST} component={SearchTest} />
-      <Stack.Screen name={RouteNames.ORDER} component={OrderScreen} />
       <Stack.Screen name={RouteNames.PROFILE_EDIT} component={ProfileEdit} />
-      <Stack.Screen name={RouteNames. FORGET_PASSWORD} component={ForgetPassword} />
+      <Stack.Screen
+        name={RouteNames.FORGET_PASSWORD}
+        component={ForgetPassword}
+      />
       <Stack.Screen name={RouteNames.LANDING} component={AppNavigator} />
     </Stack.Navigator>
   );

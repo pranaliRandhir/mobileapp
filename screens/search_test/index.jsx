@@ -22,6 +22,7 @@ import { styles } from "./styles";
 import ApiClient from "../../utils/api_client";
 import { DrawerScreens,RouteNames } from "../../navigation/route_names";
 import { COLOR_PRESETS } from "../../presets/colors";
+import { routeNames } from "../home/router";
 //import { SvgUri } from 'react-native-svg';
 
 const DeviceWidth = Dimensions.get("window").width;
@@ -59,7 +60,7 @@ export class SearchTest extends Component {
           }}
         >
           <View style={{ flex: 8 }}>
-           
+
             <Input
               inputContainerStyle={styles.inputContainer}
               leftIconContainerStyle={styles.leftIconContainer}
@@ -101,7 +102,7 @@ export class SearchTest extends Component {
     return (
       <TouchableOpacity
         onPress={() => {
-          this.props.navigation.navigate(RouteNames.LAB_SCHEDULE, item);
+          this.props.navigation.navigate(routeNames.LAB_SCHEDULE, item);
         }}
         style={styles.cardRootContainer}
       >

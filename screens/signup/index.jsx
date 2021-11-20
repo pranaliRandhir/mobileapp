@@ -5,21 +5,21 @@
 
  import React, { Component } from "react";
  import { Image, Text, View, FlatList, TouchableOpacity,CheckBox ,Alert,ScrollView,} from "react-native";
- 
+
  import Icon from "react-native-vector-icons/Fontisto";
  import { Input } from "react-native-elements";
- 
+
  import { Header, Footer } from "../../components";
  import { HealthOrbitImage } from "../../assets";
  import { styles } from "./styles";
  import ApiClient from "../../utils/api_client";
- 
+
  import { COLOR_PRESETS } from "../../presets/colors";
  import { RouteNames } from "../../navigation/route_names";
 //  import SvgUri from 'react-native-svg-uri';
- 
- 
- 
+
+
+
 
  export class SingUp extends Component {
    constructor(props) {
@@ -34,19 +34,19 @@
       UserMobile:'',
       UserMobileValidate:''
      };
-     
+
    }
- 
+
    UserRegistrationFunction = () =>{
- 
- 
+
+
     const { UserName }  = this.state ;
     const { UserEmail }  = this.state ;
     const { UserPassword }  = this.state ;
     const { UserMobile}  = this.state ;
-    
-    
-    
+
+
+
     fetch('https://engistack.com/dm/user/user_registration.php', {
      method: 'POST',
      headers: {
@@ -54,20 +54,20 @@
        'Content-Type': 'application/json',
      },
      body: JSON.stringify({
-    
+
        name: UserName,
-    
+
        email: UserEmail,
-    
+
        password:UserPassword,
 
        mobile : UserMobile
-    
+
      })
-    
+
    }).then((response) => response.json())
          .then((responseJson) => {
-    
+
    // Showing response message coming from server after inserting records.
            Alert.alert(responseJson );
           //  Alert.alert(
@@ -78,8 +78,8 @@
          }).catch((error) => {
            console.error(error);
          });
-    
-    
+
+
     }
 
 
@@ -89,14 +89,14 @@
     //console.log(userName);
     let reg = /^[A-Za-z]+$/;
     if (reg.test(userName) === false) {
-     
+
       this.setState({UserNameValidate: "Enter Valid Username"})
       this.setState({UserName: userName})
       //return false;
     }
     else {
       this.setState({UserNameValidate: "Username Valid"})
-      
+
     }
 
   }
@@ -104,7 +104,7 @@
     //console.log(username);
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
     if (reg.test(UserEmail) === false) {
-     
+
       this.setState({ UserEmailValidate: "Invalid Email ID"})
       this.setState({ UserEmail: UserEmail})
 
@@ -122,7 +122,7 @@
     //console.log(usermobile);
     let reg = /^[0-9]+$/;
     if (reg.test(usermobile) === false) {
-     
+
       this.setState({UserMobileValidate: "Enter Valid Mobile number"})
       this.setState({UserMobile: usermobile})
       //return false;
@@ -130,7 +130,7 @@
     else {
       this.setState({UserMobileValidate: "Mobile  Valid"})
       this.setState({UserMobile: usermobile})
-      
+
     }
 
   }
@@ -139,32 +139,33 @@
   password_validate = (password) => {
     //console.log(password);
     let errorFlag = false;
-    
-    
+
+
       //console.log("1");
      if (this.state.UserPassword.length < 5 ||  this.state.UserPassword.length > 10) {
-        
+
         this.setState({ UserpasswordValidate: "Password should be min 5 char and max 10 char"});
-      } 
-      
+      }
+
   }
- 
-  
+
+
    renderBody() {
      return (
       <ScrollView>
        <View style={{ flex: 1 }}>
          <View style={styles.logoContainer}>
-           
-           {/* <SvgUri 
-             width="200" 
-             height="200" 
+
+           {/* <SvgUri
+             width="200"
+             height="200"
              source={{uri:'https://kigadel.com/gimonn/ic/Icons/Icon%20Logo.svg'}}
            /> */}
            {/* <Image source={HealthOrbitImage} style={styles.logoSize} /> */}
-             
+
          </View>
 
+          //TODO: Remove
          <TouchableOpacity onPress={() => {this.props.navigation.navigate(RouteNames.SCREEN_2)}}>
            <Text style={styles.testHeader}>SignUp</Text>
          </TouchableOpacity>
@@ -179,7 +180,7 @@
            onChangeText={(UserName) => this.username_validate(UserName)}
           />
            {this.state.UserNameValidate == "Enter Valid Username" && this.state.UserNameValidate.length > 0 && <Text style={styles.inputError}>{this.state.UserNameValidate}</Text>}
- 
+
           <Input
            inputContainerStyle={styles.inputContainer}
            leftIconContainerStyle={styles.leftIconContainer}
@@ -190,9 +191,9 @@
            onChangeText={(UserEmail) => this.email_validate(UserEmail)}
           />
           {this.state.UserEmailValidate == "Invalid Email ID" && this.state.UserEmailValidate.length > 0 && <Text style={styles.inputError}>{this.state.UserEmailValidate}</Text>}
-          <Input  
+          <Input
            keyboardType='numeric'
-           maxLength={10} 
+           maxLength={10}
            inputContainerStyle={styles.inputContainer}
            leftIconContainerStyle={styles.leftIconContainer}
            inputStyle={styles.input}
@@ -202,7 +203,7 @@
            //onChangeText={UserMobile => this.setState({UserMobile})}
            onChangeText={(UserMobile) => this.usermobile_validate(UserMobile)}
           />
-          
+
           {this.state.UserMobileValidate == "Enter Valid Mobile number" && this.state.UserMobileValidate.length > 0 && <Text style={styles.inputError}>{this.state.UserMobileValidate}</Text>}
 
 
@@ -212,26 +213,26 @@
            inputStyle={styles.input}
            containerStyle={styles.inputRootContainer}
            placeholder="Password"
-           secureTextEntry={true} 
+           secureTextEntry={true}
            style={{color:"black"}}
-          //  maxLength={10} 
-           minLength={3} 
+          //  maxLength={10}
+           minLength={3}
            onChangeText={UserPassword => this.setState({UserPassword})}
           />
 
 
            <View style={{ flexDirection: 'column',marginLeft:30}}>
-              
+
               <View style={{ flexDirection: 'row',marginRight:50 }}>
                 <CheckBox
                   value={this.state.checked}
                   onValueChange={() => this.setState({ checked: !this.state.checked })}
                 />
-                 
+
                 <Text style={{marginTop: 5,color:COLOR_PRESETS.PRIMARY.DARK}}> By signing up you accept the terms of services and the privacy policy</Text>
               </View>
             </View>
-         
+
           <TouchableOpacity onPress={this.UserRegistrationFunction}>
             <Text style={styles.SingIn}>Sign Up</Text>
           </TouchableOpacity>
@@ -244,15 +245,15 @@
               <Text style={styles.signup}>SignIn </Text>
             </TouchableOpacity>
           </View>
-        
+
        </View>
       </ScrollView>
 
 
      );
    }
- 
-   
+
+
    render() {
      return (
        <>
@@ -265,6 +266,5 @@
      );
    }
  }
- 
+
  export default SingUp;
- 

@@ -4,7 +4,14 @@
  */
 
 import React, { Component } from "react";
-import { Dimensions, Image, Text, View, FlatList , TouchableOpacity} from "react-native";
+import {
+  Dimensions,
+  Image,
+  Text,
+  View,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 
 import Icon from "react-native-vector-icons/Fontisto";
 import { Input, Divider } from "react-native-elements";
@@ -13,11 +20,12 @@ import { Header, Footer } from "../../components";
 import { HealthOrbitImage } from "../../assets";
 import { styles } from "./styles";
 import ApiClient from "../../utils/api_client";
-import {  DrawerScreens,RouteNames } from "../../navigation/route_names";
+import { DrawerScreens, RouteNames } from "../../navigation/route_names";
 import { COLOR_PRESETS } from "../../presets/colors";
+import { DrawerActions } from "@react-navigation/routers";
 //import { SvgUri } from 'react-native-svg';
 
-const DeviceWidth = Dimensions.get('window').width
+const DeviceWidth = Dimensions.get("window").width;
 export class Screen2 extends Component {
   constructor(props) {
     super(props);
@@ -28,9 +36,9 @@ export class Screen2 extends Component {
 
   componentDidMount() {
     const formData = new FormData();
-     console.log('the navigation params is>>>>>>', this.props.route.params);
+    console.log("the navigation params is>>>>>>", this.props.route.params);
     const testId = this.props.route.params.search;
-    console.log('the navigation params is>>>>>>',  testId );
+    console.log("the navigation params is>>>>>>", testId);
 
     formData.append("action", "getTests");
 
@@ -43,10 +51,11 @@ export class Screen2 extends Component {
     const { testList } = this.state;
     return (
       <View style={{ flex: 1 }}>
-
-        <View style={{
-          flexDirection: 'row',
-        }}>
+        <View
+          style={{
+            flexDirection: "row",
+          }}
+        >
           <View style={{ flex: 8 }}>
             <Input
               inputContainerStyle={styles.inputContainer}
@@ -57,7 +66,7 @@ export class Screen2 extends Component {
               leftIcon={<Icon name="search" size={18} color="gray" />}
             />
           </View>
-          <View style={{ flex: 5, marginLeft:-45}}>
+          <View style={{ flex: 5, marginLeft: -45 }}>
             <Input
               inputContainerStyle={styles.inputContainer}
               leftIconContainerStyle={styles.leftIconContainer}
@@ -67,12 +76,7 @@ export class Screen2 extends Component {
               leftIcon={<Icon name="search" size={18} color="gray" />}
             />
           </View>
-         
         </View>
-
-
-
-
 
         <FlatList
           data={testList}
@@ -87,7 +91,12 @@ export class Screen2 extends Component {
 
   renderTestCard(item, index) {
     return (
-      <TouchableOpacity onPress={() => { this.props.navigation.navigate( DrawerScreens.LAB_SCHEDULE, item) }} style={styles.cardRootContainer}>
+      <TouchableOpacity
+        onPress={() => {
+          this.props.navigation.navigate(DrawerScreens.LAB_SCHEDULE, item);
+        }}
+        style={styles.cardRootContainer}
+      >
         <View style={styles.cardRootContainer}>
           <View style={styles.cardContentContainer}>
             <View style={styles.cardHeaderContainer}>
@@ -101,23 +110,30 @@ export class Screen2 extends Component {
                   justifyContent: 'center',
                   alignItems: 'center',
                   width:75,
-                
-                }}> */}
-              <View style={{
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginLeft: 50,
 
-              }}>
+                }}> */}
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginLeft: 50,
+                }}
+              >
                 <View>
                   <View style={{ width: DeviceWidth * 0.65 }}>
                     <Text style={styles.testName}>{item.sName}</Text>
                   </View>
-                  <View style={{ width: DeviceWidth * 0.50, marginLeft: 10 }}>
+                  <View style={{ width: DeviceWidth * 0.5, marginLeft: 10 }}>
                     <Text>Distance 3kms</Text>
                   </View>
-                  <View style={{ width: DeviceWidth * 0.50, marginLeft: 10, paddingTop: -10 }}>
+                  <View
+                    style={{
+                      width: DeviceWidth * 0.5,
+                      marginLeft: 10,
+                      paddingTop: -10,
+                    }}
+                  >
                     <Image
                       source={require("../../assets/images/star.png")}
                       style={[styles.cardImg, { height: 20 }]}
@@ -132,7 +148,6 @@ export class Screen2 extends Component {
               />
             </View>
           </View>
-
         </View>
       </TouchableOpacity>
     );
@@ -149,7 +164,7 @@ export class Screen2 extends Component {
                 style={styles.toggleDrawer}
                 onPress={() => {
                   console.log("menu pressed");
-                  this.props.navigation.toggleDrawer();
+                  this.props.navigation.dispatch(DrawerActions.toggleDrawer());
                 }}
               />
             }
